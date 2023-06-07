@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-import com.unla.ghsicilianotfi.helpers.ViewRouteHelper;
-import com.unla.ghsicilianotfi.services.IPersonService;
+import helpers.ViewRouteHelper;
+//import services.IPersonService;
 
 @Controller
 @RequestMapping("/")
@@ -22,16 +22,16 @@ public class HomeController {
 //	@Autowired
 //	@Qualifier("personService")
 //	private IPersonService personService;
-//
-//	//GET Example: SERVER/index
-//	@GetMapping("/index")
-//	public ModelAndView index() {
-//		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.INDEX);
+
+	//GET Example: SERVER/index
+	@GetMapping("/index")
+	public ModelAndView index() {
+		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.INDEX);
 //		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 //		modelAndView.addObject("username", user.getUsername());
 //		modelAndView.addObject("persons", personService.getAll());
-//		return modelAndView;
-//	}
+		return modelAndView;
+	}
 //
 //	//GET Example: SERVER/hello?name=someName
 //	@GetMapping("/hello")
@@ -49,8 +49,8 @@ public class HomeController {
 //		return mV;
 //	}
 //
-//	@GetMapping("/")
-//	public RedirectView redirectToHomeIndex() {
-//		return new RedirectView(ViewRouteHelper.ROUTE);
-//	}
+	@GetMapping("/")
+	public RedirectView redirectToHomeIndex() {
+		return new RedirectView(ViewRouteHelper.ROUTE);
+	}
 }
