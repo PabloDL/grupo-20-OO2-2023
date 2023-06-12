@@ -1,3 +1,5 @@
+/*
+
 package controllers;
 
 import org.springframework.stereotype.Controller;
@@ -30,3 +32,5 @@ public class UserController {
 		return "redirect:/index";
 	}
 }
+
+*/

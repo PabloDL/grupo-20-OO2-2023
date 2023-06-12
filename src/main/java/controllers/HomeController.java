@@ -23,8 +23,9 @@ public class HomeController {
 //	@Qualifier("personService")
 //	private IPersonService personService;
 
-	//GET Example: SERVER/index
-	@GetMapping("/index")
+//	//GET Example: SERVER/index
+//	@GetMapping("/index")
+	@GetMapping("/")
 	public ModelAndView index() {
 		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.INDEX);
 //		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -32,7 +33,7 @@ public class HomeController {
 //		modelAndView.addObject("persons", personService.getAll());
 		return modelAndView;
 	}
-//
+
 //	//GET Example: SERVER/hello?name=someName
 //	@GetMapping("/hello")
 //	public ModelAndView helloParams1(@RequestParam(name="name", required=false, defaultValue="null") String name) {
@@ -40,7 +41,7 @@ public class HomeController {
 //		mV.addObject("name", name);
 //		return mV;
 //	}
-//
+
 //	//GET Example: SERVER/hello/someName
 //	@GetMapping("/hello/{name}")
 //	public ModelAndView helloParams2(@PathVariable("name") String name) {
@@ -48,9 +49,9 @@ public class HomeController {
 //		mV.addObject("name", name);
 //		return mV;
 //	}
-//
-	@GetMapping("/")
-	public RedirectView redirectToHomeIndex() {
-		return new RedirectView(ViewRouteHelper.ROUTE);
-	}
+
+//	@GetMapping("/")
+//	public RedirectView redirectToHomeIndex() {
+//		return new RedirectView(ViewRouteHelper.ROUTE);
+//	}
 }
