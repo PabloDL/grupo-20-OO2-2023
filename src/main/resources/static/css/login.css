@@ -1,0 +1,98 @@
+.theme-container{
+    height: 13px;
+    width: 13px;
+    border-radius: 50%;
+    background-color: gray;
+}
+
+.theme-container .dark {
+    height: 50px;
+    width: 20px;
+    border-radius: 50%;
+    background-color: gray;
+}
+.theme-container .light {
+    height: 13px;
+    width: 31px;
+    border-radius: 50%;
+    background-color: rgb(251, 198, 26);
+
+}
+
+/*-----------------*/
+.fondo{
+  background: #3f3d3d;
+}
+
+.toggle-container {
+position: fixed;
+top: 20px;
+right: 20px;
+width: 30px;
+height: 70px;
+overflow: hidden;
+background-color: gray;
+border-radius: 500px;
+}
+
+.toggle {
+position: relative;
+width: 100%;
+height: 100%;
+background-color: transparent;
+cursor: pointer;
+transition: background-color 1s ease-in-out;
+}
+
+.circle {
+position: relative;
+top: 20px;
+left: 7px;
+width: 15px;
+height: 15px;
+background-color: yellow;
+border-radius: 50%;
+transform: translateY(-100%);
+transition: transform 1s ease-in-out;
+}
+
+.toggle.active > .circle {
+position: relative;
+top: 31%;
+left: 25%;
+width: 15px;
+height: 15px;
+background-color: yellow;
+border-radius: 50%;
+transform: translateY(-100%);
+transition: transform 1s ease-in-out,
+  background-color 1s ease-in-out;
+}
+
+.toggle > .circle {  
+background-color: white;
+transform: translateY(182%);
+transition: transform 1s ease-in-out,  
+  background-color 1s ease-in-out;
+}
+
+
+.toggle.active > .circle > .moon-shadow {
+position: relative;
+top: -15px;
+left: 15px;
+width: 13px;
+height: 13px;
+border-radius: 50%;
+transform: translate(0,0);
+transition: transform 1s ease-in-out;
+}
+.moon-shadow {
+position: relative;
+width: 13px;
+height: 13px;
+background-color: gray;
+border-radius: 50%;
+transform: translate(5px,-2px);
+transition: transform 1s ease-in-out;
+}

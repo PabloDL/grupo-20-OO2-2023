@@ -20,6 +20,7 @@ public class ViewRouteHelper {
 	//USER
 	public final static String USER_LOGIN = "user/login";
 	public final static String USER_LOGOUT = "user/logout";
+	public final static String USER_LOGIN_PROCESS = "user/loginProcess";
 
 	/**** Redirects ****/
 	public final static String ROUTE = "/index";
