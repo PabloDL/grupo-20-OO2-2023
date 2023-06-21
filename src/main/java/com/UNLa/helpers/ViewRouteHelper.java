@@ -1,4 +1,4 @@
-package helpers;
+package com.UNLa.helpers;
 
 public class ViewRouteHelper {
 	/**** Views ****/
@@ -7,9 +7,9 @@ public class ViewRouteHelper {
 	public final static String HELLO = "home/hello";
 
 	//DEGREE
-	public final static String DEGREE_INDEX = "degree/index";
-	public final static String DEGREE_FORM = "degree/form";
-	public final static String DEGREE_NEW = "degree/new";
+	public final static String DEVICE_INDEX = "device/index";
+	public final static String DEVICE_FORM = "device/form";
+	public final static String DEVICE_NEW = "device/new";
 
 	//PERSON
 	public final static String PERSON_INDEX = "person/index";

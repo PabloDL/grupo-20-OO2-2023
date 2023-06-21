@@ -1,4 +1,4 @@
-package models;
+package com.UNLa.models;
 
 import lombok.Getter;
 import lombok.Setter;

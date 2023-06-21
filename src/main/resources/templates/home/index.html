@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>UNLa</title>
+	
+	<div th:replace="fragments :: html_head"></div th:replace>
+	
+	<!-- Bootstrap core CSS -->
+	<link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+	<!-- Custom styles for this template -->
+	<link href="/css/modern-business.css" rel="stylesheet" />
+
+</head>
+<body>
+	<!-- Navigation -->
+	<div th:replace="fragments :: navbar"></div th:replace>
+	
+	<input id="getDispositivos" type="button" value="Mostrar Dispositivos">
+	
+
+	<main class="container" style="width:100%">
+		<div th:replace="fragments :: sidebar"></div th:replace>
+		<img src="background-image: url('/src/main/resources/static/asset/Plano-UNLa.jpg')">	
+	</main class="container" style="width:100%">
+	
+	<div th:replace="fragments :: footer"></div th:replace>
+			
+	<!-- Bootstrap core JavaScript -->
+	<script src="/vendor/jquery/jquery.min.js"></script>
+	<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script type="text/javascript">
+		
+		$('#getDispositivos').click(
+            $.ajax({
+                'type':'GET',
+                'url':'/Devices/getAllDevices',
+                'cache':false
+            })
+        );
+		
+	</script>
+</body>
+</html>
