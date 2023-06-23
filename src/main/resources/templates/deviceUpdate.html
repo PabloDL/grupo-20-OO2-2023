@@ -1,0 +1,40 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments :: headerFragment}"></head>
+
+<body>
+	<div th:replace="~{fragments :: navbarFragment}"></div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+				<h1 class=text-center>Actualizar Dispositivo</h1>
+				<div class="card_body">
+					<!-- CONTROLLER HANDLER -->
+					<!-- OBJECT MODEL -->
+					<form th:action="@{|/dispositivos/actualizar/${device.id}|}" th:object="${device}" method="POST">
+						<div class="form-group">
+							<label>Habilitado</label> 
+							<input type="checkbox" name="enabled" th:field="*{enabled}"/>
+							<!-- th ==> MODEL ATTRIBUTE -->
+						</div>
+						<div>
+							<label>Nombre</label> 
+							<input type="text" name="name" th:field="*{name}" placeholder="Nombre" />
+							<!-- th ==> MODEL ATTRIBUTE -->
+						</div>
+						<div class="footer-body">
+							<button type="submit" class="btn btn-primary">Actualizar</button>
+						</div>
+
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div th:replace="~{fragments :: footerFragment}"></div>
+</body>
+</html>

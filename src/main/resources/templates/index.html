@@ -23,7 +23,8 @@
 			<a href="/"
 				class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom text-white">
 				<svg class="bi pe-none me-2" width="30" height="24">
-					<use xlink:href="#bootstrap"></use></svg> <span class="fs-5 fw-semibold">UNLa</span>
+					<use xlink:href="#bootstrap"></use></svg> 
+					<span class="fs-5 fw-semibold">UNLa</span>
 			</a>
 			<ul class="list-unstyled ps-0">
 				<li class="mb-1">
@@ -53,11 +54,11 @@
 						<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
 							<li><a href="/devices/new"
 								class="link-body-emphasis d-inline-flex text-decoration-none rounded text-white-50">Alta</a></li>
-							<li><a href="/devices/delete"
+							<li><a href="/dispositivos/crear"
 								class="link-body-emphasis d-inline-flex text-decoration-none rounded text-white-50">Baja</a></li>
-							<li><a href="/devices/edit"
+							<li><a href="/dispositivos/actualizar"
 								class="link-body-emphasis d-inline-flex text-decoration-none rounded text-white-50">Modificaciones</a></li>
-							<li><a href="/devices"
+							<li><a href="/dispositivos"
 								class="link-body-emphasis d-inline-flex text-decoration-none rounded text-white-50">Listado</a></li>
 						</ul>
 					</div>
@@ -68,12 +69,13 @@
 						data-bs-toggle="collapse" data-bs-target="#orders-collapse"
 						aria-expanded="false">Sensores</button>
 						
-					<div class="collapse ml-4" id="orders-collapse">					
+					<div class="collapse ml-4" id="orders-collapse">
+<!-- 
 						<ul th:each = "device: ${devices}" class="btn-toggle-nav list-unstyled fw-normal pb-1 small" >
-							<!-- th:href="|/sensors/${device.name}|" -->
-							<li><a href=""
+							<li><a th:href="@{/sensores/{name}(name=${device.name})|"
 								class="link-body-emphasis d-inline-flex text-decoration-none rounded text-white-50" ><text th:text="device:${device.name}"/></a></li>
 						</ul>
+						-->
 					</div>
 				</li>
 				<li class="mb-1">

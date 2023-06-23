@@ -1,19 +1,17 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="fragments :: headerFragment"></head>
-
+<head th:replace="~{fragments :: headerFragment}"></head>
 <body>
-	<head th:replace="fragments :: navbarFragment"></head>
+	<div th:replace="~{fragments :: navbarFragment}"></div>
 
 	<div class="container">
 		<div class="row">
 			<h1> Listado de Dispositivos</h1>
 		</div>
 		<div class = "row">
-			<a th:href = "@{/devices/new}" class = "btn btn-primary btn-sm mb-3">Agregar Dispositivo</a>
+			<a th:href = "@{/dispositivos/crear}" class = "btn btn-primary btn-sm mb-3">Crear</a>
 		</div>
 		
 		<table class="table">
@@ -21,20 +19,27 @@
 				<tr>
 					<th scope="col">Habilitado</th>
 					<th scope="col">Nombre</th>
+					<th scope="col">Acciones</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each = "device: ${devices}">
-					<td><input type="checkbox" disabled="disabled" name="enabled" th:checked="${device.enabled}"/>
-					</td>
+					<td><input type="checkbox" disabled="disabled" name="enabled" th:checked="${device.enabled}"/></td>
 					<td th:text = "${device.name}"></td>
+					<td>
+						<a th:href = "@{/dispositivos/actualizar?id={id} (id=${device.id})}" class = "btn btn-primary">Actualizar</a>
+						<!--
+							"@{/dispositivos/actualizar{id} (id=${device.id})}" 
+							"@{|/dispositivos/actualizar?id=${device.id}|}"	
+						-->
+					</td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
 	
 	
-	<div th:replace="fragments :: footerFragment"></div>
+	<div th:replace="~{fragments :: footerFragment}"></div>
 </body>
 
 </html>
