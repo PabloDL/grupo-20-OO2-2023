@@ -54,11 +54,11 @@
 						<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
 							<li><a href="/devices/new"
 								class="link-body-emphasis d-inline-flex text-decoration-none rounded text-white-50">Alta</a></li>
-							<li><a href="/dispositivos/crear"
+							<li><a href="/devices/delete"
 								class="link-body-emphasis d-inline-flex text-decoration-none rounded text-white-50">Baja</a></li>
-							<li><a href="/dispositivos/actualizar"
+							<li><a href="/devices/edit"
 								class="link-body-emphasis d-inline-flex text-decoration-none rounded text-white-50">Modificaciones</a></li>
-							<li><a href="/dispositivos"
+							<li><a href="/devices"
 								class="link-body-emphasis d-inline-flex text-decoration-none rounded text-white-50">Listado</a></li>
 						</ul>
 					</div>
@@ -69,13 +69,11 @@
 						data-bs-toggle="collapse" data-bs-target="#orders-collapse"
 						aria-expanded="false">Sensores</button>
 						
-					<div class="collapse ml-4" id="orders-collapse">
-<!-- 
+					<div class="collapse ml-4" id="orders-collapse">					
 						<ul th:each = "device: ${devices}" class="btn-toggle-nav list-unstyled fw-normal pb-1 small" >
-							<li><a th:href="@{/sensores/{name}(name=${device.name})|"
+							<li><a th:href="@{/sensors/{name}(name=${device.name})|"
 								class="link-body-emphasis d-inline-flex text-decoration-none rounded text-white-50" ><text th:text="device:${device.name}"/></a></li>
 						</ul>
-						-->
 					</div>
 				</li>
 				<li class="mb-1">

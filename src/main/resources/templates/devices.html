@@ -2,16 +2,17 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="~{fragments :: headerFragment}"></head>
+<head th:replace="fragments :: headerFragment"></head>
+
 <body>
-	<div th:replace="~{fragments :: navbarFragment}"></div>
+	<head th:replace="fragments :: navbarFragment"></head>
 
 	<div class="container">
 		<div class="row">
 			<h1> Listado de Dispositivos</h1>
 		</div>
 		<div class = "row">
-			<a th:href = "@{/dispositivos/crear}" class = "btn btn-primary btn-sm mb-3">Crear</a>
+			<a th:href = "@{/devices/create}" class = "btn btn-primary btn-sm mb-3">Agregar Dispositivo</a>
 		</div>
 		
 		<table class="table">
@@ -24,14 +25,12 @@
 			</thead>
 			<tbody>
 				<tr th:each = "device: ${devices}">
-					<td><input type="checkbox" disabled="disabled" name="enabled" th:checked="${device.enabled}"/></td>
+					<td><input type="checkbox" disabled="disabled" name="enabled" th:checked="${device.enabled}"/>
+					</td>
 					<td th:text = "${device.name}"></td>
 					<td>
-						<a th:href = "@{/dispositivos/actualizar?id={id} (id=${device.id})}" class = "btn btn-primary">Actualizar</a>
-						<!--
-							"@{/dispositivos/actualizar{id} (id=${device.id})}" 
-							"@{|/dispositivos/actualizar?id=${device.id}|}"	
-						-->
+						<a th:href = "@{|/device/edit?id=${device.id}|}" class = "btn btn-primary">Update</a>
+						
 					</td>
 				</tr>
 			</tbody>
@@ -39,7 +38,8 @@
 	</div>
 	
 	
-	<div th:replace="~{fragments :: footerFragment}"></div>
+	<div th:replace="fragments :: footerFragment"></div>
 </body>
 
+<script src="static/deviceCrud.js"></script>
 </html>

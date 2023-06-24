@@ -26,7 +26,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr th:each="device: ${devices}">
+			<tr th:each="device: ${devices}" th:object-id="${device.id}">
 				<td><input type="checkbox" disabled="disabled" name="enabled"
 					th:checked="${device.enabled}" /></td>
 				<td th:text="${device.name}"></td>
@@ -36,9 +36,10 @@
 			<tr class="template-row" style="display: none;">
 				<td><input type="checkbox" name="enabled" checked="checked"/></td>
 				<td><input type="text" name="name" /></td>
-				<td><a href="#" class="btn btn-danger cancel-btn">Cancelar</a> 
+				<td class="d-flex justify-content-around">
+					<a href="#" class="btn btn-danger cancel-btn">Cancelar</a> 
 					<a href="#" class="btn btn-success save-btn">Guardar</a>
-					<div>
+					<div style="margin-top: 4px">
 						<div class="spinner-border" style="width: 2rem; height: 2rem; position: absolute;" role="status" hidden="hidden"></div>
 						<div class="spinner-grow" style="width: 2rem; height: 2rem; justify-content: center; align-items: center;" role="status" hidden="hidden">
 							<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="white" class="bi bi-check" viewBox="0 0 16 16">
