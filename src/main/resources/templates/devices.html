@@ -26,8 +26,7 @@
 			<tr th:each="device: ${devices}" th:object-id="${device.id}">
 				<td><input type="checkbox" disabled="disabled" name="enabled"
 					th:checked="${device.enabled}" /></td>
-				<td><a th:href = "
-				@{/dispositivos/{name} name=}" class="btn btn-primary update-btn" th:text="${device.name}"></a> </td>
+				<td><a th:href = "@{/dispositivos/{name} name=}" class="btn btn-primary update-btn" th:text="${device.name}"></a> </td>
 				<td><a href="#" class="btn btn-primary update-btn">Editar</a></td>
 			</tr>
 			

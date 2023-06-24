@@ -33,14 +33,15 @@ public class DeviceServiceImplementation implements IDeviceService{
 	};
 		
 	public Device createUpdateDevice(Device device) {
-		Device dbDevice = this.getDevice(Long.valueOf(device.getId()));
-		if(dbDevice != null) {
-			dbDevice.setName(device.getName());
-			dbDevice.setEnabled(device.isEnabled());
+		Device dbDevice;
+		if(device.getId() != -1) {
+			dbDevice = this.getDevice(Long.valueOf(device.getId()));
 		}
 		else {
 			dbDevice = new Device();
 		}
+		dbDevice.setName(device.getName());
+		dbDevice.setEnabled(device.isEnabled());
 		return deviceRepository.save(dbDevice);
 	}
 }
