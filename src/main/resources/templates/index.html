@@ -70,9 +70,13 @@
 						aria-expanded="false">Sensores</button>
 						
 					<div class="collapse ml-4" id="orders-collapse">					
-						<ul th:each = "device: ${devices}" class="btn-toggle-nav list-unstyled fw-normal pb-1 small" >
-							<li><a th:href="@{/sensors/{name}(name=${device.name})|"
-								class="link-body-emphasis d-inline-flex text-decoration-none rounded text-white-50" ><text th:text="device:${device.name}"/></a></li>
+						<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small" >
+							<li th:each = "device: ${devices}" th:object-id="${device.id}">
+								<a th:href="@{/sensors/{name}(name=${device.name})|"
+									class="link-body-emphasis d-inline-flex text-decoration-none rounded text-white-50" >
+									<text th:text="device:${device.name}"/>
+								</a>
+							</li>
 						</ul>
 					</div>
 				</li>

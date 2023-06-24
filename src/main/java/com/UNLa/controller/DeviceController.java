@@ -24,55 +24,30 @@ public class DeviceController {
 	@GetMapping("/dispositivos")
 	public String listDevices(Model model) {
 		model.addAttribute("devices", deviceService.getAllDevices());
-		return "devicesTest";
-	}
-
-	@GetMapping("/dispositivos/crear")
-	public String createDeviceForm(Model model) {
-		Device device = new Device();
-		model.addAttribute("device", device);
-		return "deviceCreate";
-	}
-	
-	@PostMapping("/dispositivos/crear")
-	public String saveDevice(@ModelAttribute("device") Device device) {
-		deviceService.saveDevice(device);
-		return "redirect:/dispositivos";
-	}
-
-	@GetMapping("/dispositivos/actualizar/{id}")
-	public String editDeviceForm(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("devices", deviceService.getDevice(id));
-		return "deviceUpdate";
-	}
-	
-	@PostMapping("/dispositivos/actualizar")
-	public String editDeviceForm(@PathVariable Long deviceId, 
-			@ModelAttribute("device") Device device, Model model) {
-		
-		//Device updateDevice = deviceService.createUpdateDevice(device);
-		Device updateDevice = deviceService.getDevice(deviceId);
-		updateDevice.setName(device.getName());
-		updateDevice.setEnabled(device.isEnabled());
-		
-		deviceService.saveDevice(updateDevice);
-		return "redirect:/dispositivo";
-	}
-	
+		return "devices";
+	}	
 	
 	@PostMapping("/devices/crud")
 	public ResponseEntity<String> handleCrudRequest(@RequestBody Device device) {
 		// Aquí puedes procesar los datos recibidos
+		
+		System.out.println(device.toString());
+		
 		int id = device.getId();
 		boolean enabled = device.isEnabled();
 		String name = device.getName();
 		
-		deviceService.createUpdateDevice(device);
-		
-			return ResponseEntity.ok("implementar mensajes satifactorios y errores");
-//		} else {
-//			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al procesar los cambios");
-//		}
+		Device stored = deviceService.createUpdateDevice(device);
+		return ResponseEntity.ok("" + stored.getId());
+	}
+	
+
+	@GetMapping("/sensors")
+	public String listSensors(Model model) {
+		model.addAttribute("Sensor", SensorService.getAllSensors(long deviceId));
+		return "sensors";
 	}
 
+	
+	
 }
