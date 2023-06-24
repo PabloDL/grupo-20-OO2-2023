@@ -52,32 +52,28 @@
 						aria-expanded="false">Dispositivos</button>
 					<div sec:authorize="hasRole('ROLE_ADMIN')" class="collapse ml-4" id="dashboard-collapse">
 						<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-							<li><a href="/devices/new"
-								class="link-body-emphasis d-inline-flex text-decoration-none rounded text-white-50">Alta</a></li>
-							<li><a href="/dispositivos/crear"
-								class="link-body-emphasis d-inline-flex text-decoration-none rounded text-white-50">Baja</a></li>
-							<li><a href="/dispositivos/actualizar"
-								class="link-body-emphasis d-inline-flex text-decoration-none rounded text-white-50">Modificaciones</a></li>
 							<li><a href="/dispositivos"
 								class="link-body-emphasis d-inline-flex text-decoration-none rounded text-white-50">Listado</a></li>
 						</ul>
 					</div>
 				</li>
-				<li class="mb-1">
-					<button
-						class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed text-white dropdown-btn"
-						data-bs-toggle="collapse" data-bs-target="#orders-collapse"
-						aria-expanded="false">Sensores</button>
+<!-- 				<li class="mb-1"> -->
+<!-- 					<button -->
+<!-- 						class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed text-white dropdown-btn" -->
+<!-- 						data-bs-toggle="collapse" data-bs-target="#orders-collapse" -->
+<!-- 						aria-expanded="false">Sensores</button> -->
 						
-					<div class="collapse ml-4" id="orders-collapse">
-<!-- 
-						<ul th:each = "device: ${devices}" class="btn-toggle-nav list-unstyled fw-normal pb-1 small" >
-							<li><a th:href="@{/sensores/{name}(name=${device.name})|"
-								class="link-body-emphasis d-inline-flex text-decoration-none rounded text-white-50" ><text th:text="device:${device.name}"/></a></li>
-						</ul>
-						-->
-					</div>
-				</li>
+<!-- 					<div class="collapse ml-4" id="orders-collapse">					 -->
+<!-- 						<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small" > -->
+<!-- 							<li th:each = "device: ${devices}" th:object-id="${device.id}"> -->
+<!-- 								<a th:href="@{/sensors/{name}(name=${device.name})|" -->
+<!-- 									class="link-body-emphasis d-inline-flex text-decoration-none rounded text-white-50" > -->
+<!-- 									<text th:text="device:${device.name}"/> -->
+<!-- 								</a> -->
+<!-- 							</li> -->
+<!-- 						</ul> -->
+<!-- 					</div> -->
+<!-- 				</li> -->
 				<li class="mb-1">
 					<button
 						class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed text-white dropdown-btn"
