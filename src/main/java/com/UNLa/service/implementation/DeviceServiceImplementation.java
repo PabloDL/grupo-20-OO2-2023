@@ -16,6 +16,11 @@ public class DeviceServiceImplementation implements IDeviceService{
 		super();
 		this.deviceRepository = deviceRepository;
 	}
+
+	@Override
+	public Device getDevice(Long deviceId) {
+		return deviceRepository.findById(deviceId).get();
+	}
 	
 	@Override
 	public List<Device> getAllDevices(){
@@ -26,4 +31,17 @@ public class DeviceServiceImplementation implements IDeviceService{
 	public Device saveDevice(Device device) {
 		return deviceRepository.save(device);
 	};
+		
+	public Device createUpdateDevice(Device device) {
+		Device dbDevice;
+		if(device.getId() != -1) {
+			dbDevice = this.getDevice(Long.valueOf(device.getId()));
+		}
+		else {
+			dbDevice = new Device();
+		}
+		dbDevice.setName(device.getName());
+		dbDevice.setEnabled(device.isEnabled());
+		return deviceRepository.save(dbDevice);
+	}
 }

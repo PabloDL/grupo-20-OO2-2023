@@ -7,6 +7,10 @@ import com.UNLa.entity.Device;
 public interface IDeviceService {
 	List<Device> getAllDevices();
 	
+	Device getDevice(Long deviceId);
+	
 	Device saveDevice(Device device);
 	
+	Device createUpdateDevice(Device device);
+ 
 }
