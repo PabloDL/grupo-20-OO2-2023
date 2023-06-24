@@ -16,8 +16,8 @@ $(document).ready(function() {
 	
 	//click cancelar
   	crudTable.on('click', '.cancel-btn', function() {
-        const newRow = $(this).closest('tr');
-        newRow.remove();
+		/*se elimina la fila editable*/
+        const newRow = $(this).closest('tr').remove();
     });
 
 	//click guardar
@@ -32,6 +32,7 @@ $(document).ready(function() {
         newRow.remove();
     });
   
+  //click editar
    crudTable.on('click', '.update-btn', function() {
         const button = $(this);
         const deviceId = button.data('device-id');
@@ -45,18 +46,19 @@ $(document).ready(function() {
         newRow.find('input[name="name"]').val(row.find('td:nth-child(2)').text());
 		newRow.find('.save-btn').attr('id', deviceId);
         row.after(newRow);
-
+	
+		//click cancelar en fila editada
         newRow.find('.cancel-btn').on('click', function() {
             newRow.remove();
             row.show();
         });
 
+		//click guardar en fila editada
         newRow.find('.save-btn').on('click', function() {
             const enabledValue = newRow.find('input[name="enabled"]').val();
             const nameValue = newRow.find('input[name="name"]').val();
             const id = newRow.find('.save-btn').attr('id');
-			
-			
+	
            createUpdateObject(id, enabledValue, nameValue, row);
 
             newRow.remove();
@@ -64,6 +66,7 @@ $(document).ready(function() {
         });
     });
 
+	//funcion envio de formulario
 	function createUpdateObject(id, enabledValue, nameValue,row){
 		
 		let data = {id:id, enabled:enabledValue === "on" ? true : false, name:nameValue} 
@@ -81,30 +84,22 @@ $(document).ready(function() {
 			  data: JSON.stringify(data),
 			  contentType: 'application/json',
 			  success: function(response) {
-			    // Aquí se ejecuta cuando se recibe una respuesta exitosa del controlador
-			    // Puedes realizar acciones adicionales o mostrar un mensaje de confirmación
-				row.find(".spinner-border").hide();
-				row.find(".spinner-grow").show();
 				
 				row.find('input[name="enabled"]').val(data.enabled);
 				row.find('input[name="name"]').val(data.name);
-			    // Ejemplo de mostrar un mensaje de confirmación
 			    alert('Cambios confirmados correctamente');
 			  },
 			  error: function(xhr, status, error) {
-			    // Aquí se ejecuta si ocurre un error durante la solicitud AJAX
-			    // Puedes manejar el error de alguna manera o mostrar un mensaje de error
 		
 				console.log(xhr.responseText);
 				console.log(status);
 				console.log(error);
 		
 			
-			    // Ejemplo de mostrar un mensaje de error
 			    alert('Se produjo un error al confirmar los cambios: ' + error);
 			  },
 			  complete: function(){
-				$(".spinner-grow").hide();
+				$(".spinner-border").hide();
 			}
 			});
 	}
