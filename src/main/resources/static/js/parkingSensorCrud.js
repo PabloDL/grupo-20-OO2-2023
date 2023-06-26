@@ -49,16 +49,18 @@ $(document).ready(function() {
         let deviceId = originalRow.attr('object-id');
         
         originalRow.hide();
-        //clonar id a la fila Editable        
-
+                
+		//se clonan los datos de la fila original a la editable
         let newRow = templateRow.clone().removeClass('template-row').removeAttr('style');
-        newRow.find('input[name="enabled"]').prop('checked', originalRow.find('input[name="enabled"]').prop('checked'));
-        newRow.find('input[name="name"]').val(originalRow.find('td:nth-child(2)').text());
-		
-		
+    	  newRow.find('td:nth-child(1)').text(originalRow.find('td:nth-child(1)').text());
+    	  newRow.find('input[name="enabled"]').prop('checked', originalRow.find('input[name="enabled"]').prop('checked'));
+	      newRow.find('input[name="available"]').prop('checked', originalRow.find('input[name="available"]').prop('checked')).prop('disabled', true);
+		  newRow.find('td:nth-child(4) select').val(originalRow.find('td:nth-child(4)').text())
+		  newRow.find('td:nth-child(5) select').val(originalRow.find('td:nth-child(5)').text())
+	 	
 		newRow.attr('edit-object-id', deviceId);
         originalRow.after(newRow);
-        //se reemplaza el id de la fila original a la fila editable
+        //se reemplaza el id de la fila original a la fila editableS
     });
     
     function restoreTable(originalRow, editableRow){

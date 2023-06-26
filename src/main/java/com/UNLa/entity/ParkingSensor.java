@@ -35,4 +35,13 @@ public class ParkingSensor{
 	public ParkingSensor(boolean available) {
 		this.available = available;
 	}
+
+
+	@Override
+	public String toString() {
+		return "ParkingSensor [id=" + id + ", available=" + available + ", deviceId=" + deviceId + ", enabled="
+				+ enabled + "]";
+	}
+	
+	
 }

@@ -26,4 +26,5 @@ public class SpotServiceImplementation implements ISpotService{
 	public List<Spot> getAllSpotsWithParkingSensor() {
         return spotRepository.findAllSpotsWithParkingSensor();
     }
+	
 }

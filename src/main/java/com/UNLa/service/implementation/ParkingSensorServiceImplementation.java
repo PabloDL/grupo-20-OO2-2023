@@ -22,5 +22,9 @@ public class ParkingSensorServiceImplementation implements IParkingSensorService
 		return parkingSensorRepository.findAll();
 	}
 
+	@Override
+	public List<ParkingSensor> getAllUnassignedParkingSensors(){
+		return parkingSensorRepository.findAllUnassigned();
+	}
 	
 }

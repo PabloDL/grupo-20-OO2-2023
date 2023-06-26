@@ -1,0 +1,11 @@
+.checkbox-big
+{
+ scale: 1.7;
+ margin-left: 0.8rem;
+ margin-right: 0.8rem;
+}
+
+tr
+{
+	align-items: middle;
+}

@@ -36,7 +36,7 @@ public class Spot {
 	
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="parking_sensor_id")
-	private ParkingSensor parkingSensorId;
+	private ParkingSensor parkingSensor;
 	
 	@Column(name="enabled")
 	private boolean enabled;
@@ -48,13 +48,13 @@ public class Spot {
 		this.enabled = enabled;
 	}
 	
-	public Spot(int number, String sector, /*int reserved,*/ String lastDomain, ParkingSensor parkingSensorId, boolean enabled) {
+	public Spot(int number, String sector, /*int reserved,*/ String lastDomain, ParkingSensor parkingSensor, boolean enabled) {
 		super();
 		this.number = number;
 		this.sector = sector;
 //		this.reserved = reserved;
 		this.lastDomain = lastDomain;
-		this.parkingSensorId = parkingSensorId;
+		this.parkingSensor = parkingSensor;
 		this.enabled = enabled;
 	}
 	

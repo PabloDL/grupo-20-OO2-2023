@@ -1,6 +1,8 @@
 package com.UNLa.controller;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.UNLa.entity.Device;
 import com.UNLa.entity.ParkingSensor;
 import com.UNLa.entity.Spot;
+import com.UNLa.model.ParkingSensorExpandedModel;
 import com.UNLa.service.IDeviceService;
 import com.UNLa.service.IParkingSensorService;
 import com.UNLa.service.ISpotService;
@@ -77,12 +80,70 @@ public class DeviceController {
 	
 	@GetMapping("/dispositivos/SensorEstacionamiento")
 	public String listSensors(Model model) {
-		List<Spot> parkingSpots = spotService.getAllSpotsWithParkingSensor();
-		List<ParkingSensor> parkingSensors = parkingSensorService.getAllParkingSensors();
+		List<Spot> dbParkingSpots = spotService.getAllSpots();
+		List<Spot> dbParkingSpotsSensors = spotService.getAllSpotsWithParkingSensor();
+		List<ParkingSensor> dbParkingSensors = parkingSensorService.getAllParkingSensors();
+		Set<Integer> parkingNumbers = new HashSet<Integer>();
+		Set<String> parkingSectors = new HashSet<String>();
+		for(Spot spot: dbParkingSpots) {
+			parkingNumbers.add(spot.getNumber());
+			parkingSectors.add(spot.getSector());
+		}
+		System.out.println("ahora");
+		List<ParkingSensor> unassignedParkingSensors = parkingSensorService.getAllUnassignedParkingSensors();
 		
-		model.addAttribute("parkingSensors", parkingSensors);
-		model.addAttribute("parkingSpots", parkingSpots);
+		for(ParkingSensor sens: unassignedParkingSensors) {
+			System.out.println(sens.toString());
+		}
+		
+		//model.addAttribute("parkingSensors", parkingSensors);
+		model.addAttribute("parkingSpots", dbParkingSpotsSensors);
+		model.addAttribute("parkingNumbers", parkingNumbers);
+		model.addAttribute("parkingSectors", parkingSectors);
+		model.addAttribute("parkingSensors", dbParkingSensors);
+		model.addAttribute("unassignedParkingSensors", unassignedParkingSensors);
 		
 		return "parkingSensors";
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

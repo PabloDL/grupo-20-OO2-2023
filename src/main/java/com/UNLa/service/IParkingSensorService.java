@@ -6,4 +6,5 @@ import com.UNLa.entity.ParkingSensor;
 public interface IParkingSensorService {
 	List<ParkingSensor> getAllParkingSensors();
 
+	List<ParkingSensor> getAllUnassignedParkingSensors();
 }
