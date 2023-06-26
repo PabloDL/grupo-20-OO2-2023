@@ -38,10 +38,8 @@ public class DeviceServiceImplementation implements IDeviceService{
 			dbDevice = this.getDevice(Long.valueOf(device.getId()));
 		}
 		else {
-			dbDevice = new Device();
+			dbDevice = new Device(device);
 		}
-		dbDevice.setName(device.getName());
-		dbDevice.setEnabled(device.isEnabled());
 		return deviceRepository.save(dbDevice);
 	}
 }

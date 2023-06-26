@@ -58,5 +58,13 @@ public class Spot {
 		this.enabled = enabled;
 	}
 	
-
+	public Spot(Spot parkingSpot) {
+		super();
+		this.number = parkingSpot.number;
+		this.sector = parkingSpot.sector;
+//		this.reserved = parkingSpot.reserved;
+		this.lastDomain = parkingSpot.lastDomain;
+		this.parkingSensor = parkingSpot.parkingSensor;
+		this.enabled = parkingSpot.enabled;
+	}
 }

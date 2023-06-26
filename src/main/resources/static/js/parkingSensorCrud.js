@@ -33,13 +33,14 @@ $(document).ready(function() {
 	crudTable.on('click', '.save-btn', function() {
 		//recopila info editada y la envia al formHandler
 		let editableRow = $(this).closest('tr');
-		let enabledValue = editableRow.find('input[name="enabled"]').prop('checked');
-		let nameValue = editableRow.find('input[name="name"]').val();
 		let id = editableRow.attr('edit-object-id');
 		let originalRow = $('#crud-table').find(`[object-id="${id}"]`);
-        
-		createUpdateObject(id, enabledValue, nameValue, originalRow, editableRow);
-
+		
+		let enabledValue = editableRow.find('input[name="enabled"]').prop('checked');		
+		let number = editableRow.find('td:nth-child(4) select').val();
+		let sector = editableRow.find('td:nth-child(5) select').val();
+		  
+		createUpdateObject(id, enabledValue, number, sector, originalRow, editableRow);
     });
   
   //click editar
@@ -57,6 +58,18 @@ $(document).ready(function() {
 	      newRow.find('input[name="available"]').prop('checked', originalRow.find('input[name="available"]').prop('checked')).prop('disabled', true);
 		  newRow.find('td:nth-child(4) select').val(originalRow.find('td:nth-child(4)').text())
 		  newRow.find('td:nth-child(5) select').val(originalRow.find('td:nth-child(5)').text())
+		  
+//		  newRow.find('td:nth-child(4) select').children(`${originalRow.find('td:nth-child(4)').text()}`).attr("select", "selected")
+//		  newRow.find('td:nth-child(5) select').children(`${originalRow.find('td:nth-child(5)').text()}`).attr("select", "selected")
+		  
+		  
+//		  originalRow.find('td:nth-child(4)').text() != "no asignado" 
+//		  		?newRow.find('td:nth-child(4) select').children("no asignado").attr("select", "selected")
+//		  		:newRow.find('td:nth-child(4) select').val(originalRow.find('td:nth-child(4)').text());
+//		  
+//		  originalRow.find('td:nth-child(5)').text() != "no asignado" 
+//		  		?newRow.find('td:nth-child(5) select').children("no asignado").attr("select", "selected")
+//		  		:newRow.find('td:nth-child(5) select').val(originalRow.find('td:nth-child(5)').text());
 	 	
 		newRow.attr('edit-object-id', deviceId);
         originalRow.after(newRow);
@@ -69,27 +82,33 @@ $(document).ready(function() {
 	}
 
 	//funcion formHandler
-	function createUpdateObject(id, enabledValue, nameValue, originalRow, editableRow){
+	function createUpdateObject(id, enabledValue, number, sector, originalRow, editableRow){
 		
-		let data = {id:id, enabled:enabledValue, name:nameValue} 
+		let data = {sector: sector, number: number, parkingSensor: {id : id, enabled : enabledValue} } 
 		
-	 	$.ajax({
-			  url: 'devices/crud', 
+		$.ajax({
+			  url: '/devices/parkingSensor/crud', 
 			  type: 'POST',
 			  data: JSON.stringify(data),
 			  contentType: 'application/json',
 			  beforeSend: function() {
-		      	originalRow.find(".spinner-border").show();
-		      },
+			  	originalRow.find(".spinner-border").show();
+			  },
 			  success: function(response) {
 				originalRow.attr('object-id', response )
+				newRow.find('td:nth-child(1)').text(response);
+			    newRow.find('input[name="enabled"]').prop('checked', originalRow.find('input[name="enabled"]').prop('checked'));
+			    newRow.find('input[name="available"]').prop('checked', originalRow.find('input[name="available"]').prop('checked')).prop('disabled', true);
+			  	newRow.find('td:nth-child(4) select').val(originalRow.find('td:nth-child(4)').text())
+			  	newRow.find('td:nth-child(5) select').val(originalRow.find('td:nth-child(5)').text())
+				
+				
 				originalRow.find('input[type="checkbox"]').prop('checked', enabledValue);				
 				originalRow.find('td:nth-child(2) a').text(nameValue);
 			    originalRow.find('td:nth-child(2) a').attr("href", `/dispositivos/${nameValue}`);
-				 
 			  },
 			  error: function(xhr, status, error) {
-		
+			
 				console.log(xhr.responseText);
 				console.log(status);
 				console.log(error);
@@ -99,8 +118,8 @@ $(document).ready(function() {
 			  complete: function(){
 				$(".spinner-border").hide();
 				restoreTable(originalRow, editableRow);
-			}
-			});
+			  }
+		});
 	}
   
   

@@ -31,7 +31,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr th:each="spots: ${parkingSpots}" th:object-id="${spots.id}">
+			<tr th:each="spots: ${parkingSpots}" th:object-id="${spots.parkingSensor.id}">
 				<td th:text = "${spots.parkingSensor.id}" /></td>
 				<td><input class="checkbox-big" type="checkbox" disabled="disabled" name="enabled" th:checked="${spots.parkingSensor.enabled}"/></td>
 				<td><input class="checkbox-big" type="checkbox" disabled="disabled" name="available" th:checked="${spots.parkingSensor.available}"/></td>

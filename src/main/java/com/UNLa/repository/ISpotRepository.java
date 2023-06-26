@@ -11,6 +11,6 @@ import com.UNLa.entity.Spot;
 @Repository
 public interface ISpotRepository extends JpaRepository<Spot, Long>{
 
-	@Query("FROM Spot s JOIN FETCH s.parkingSensor")
+	@Query("FROM Spot s JOIN FETCH s.parkingSensor ORDER BY s.parkingSensor.id")
     List<Spot> findAllSpotsWithParkingSensor();
 }

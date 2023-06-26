@@ -11,6 +11,7 @@ public interface IParkingSensorRepository extends JpaRepository<ParkingSensor, L
 	@Query("FROM ParkingSensor AS ps "
 			+ "LEFT JOIN FETCH Spot AS s "
 			+ "ON ps.id = s.parkingSensor.id WHERE s.parkingSensor IS NULL")
-	
 		List<ParkingSensor> findAllUnassigned();
+	
+		
 } 

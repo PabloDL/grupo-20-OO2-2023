@@ -2,6 +2,7 @@ package com.UNLa.controller;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class DeviceController {
 	@Autowired
 	private IParkingSensorService parkingSensorService;
 	@Autowired
-	private ISpotService spotService;
+	private ISpotService parkingSpotService;
 	
 	
 	@GetMapping("/dispositivos")
@@ -80,8 +81,8 @@ public class DeviceController {
 	
 	@GetMapping("/dispositivos/SensorEstacionamiento")
 	public String listSensors(Model model) {
-		List<Spot> dbParkingSpots = spotService.getAllSpots();
-		List<Spot> dbParkingSpotsSensors = spotService.getAllSpotsWithParkingSensor();
+		List<Spot> dbParkingSpots = parkingSpotService.getAllSpots();
+		List<Spot> dbParkingSpotsSensors = parkingSpotService.getAllSpotsWithParkingSensor();
 		List<ParkingSensor> dbParkingSensors = parkingSensorService.getAllParkingSensors();
 		Set<Integer> parkingNumbers = new HashSet<Integer>();
 		Set<String> parkingSectors = new HashSet<String>();
@@ -89,7 +90,6 @@ public class DeviceController {
 			parkingNumbers.add(spot.getNumber());
 			parkingSectors.add(spot.getSector());
 		}
-		System.out.println("ahora");
 		List<ParkingSensor> unassignedParkingSensors = parkingSensorService.getAllUnassignedParkingSensors();
 		
 		for(ParkingSensor sens: unassignedParkingSensors) {
@@ -105,7 +105,21 @@ public class DeviceController {
 		
 		return "parkingSensors";
 	}
+	
+	@PostMapping("/devices/parkingSensor/crud")
+	public ResponseEntity<String> handleCrudRequest(@RequestBody Spot parkingSpot) {
+		
+		ParkingSensor storedSensor = parkingSensorService.createUpdateParkingSensor(parkingSpot.getParkingSensor());
+		Spot assignedSpot = parkingSpotService.createUpdateSpot(parkingSpot);
+		
+		System.out.println(storedSensor.toString());
+		System.out.println(assignedSpot.toString());
+		
+		return ResponseEntity.ok("" + assignedSpot.getId() );
+	}
+	
 }
+
 
 
 

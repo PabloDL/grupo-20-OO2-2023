@@ -29,6 +29,11 @@ public class Device{
 		this.enabled = enabled;
 	}
 	
+	public Device(Device device) {
+		this.name = device.name;
+		this.enabled = device.enabled;
+	}
+	
 	@Override
 	public String toString() {
 		return "Device [id=" + id + ", name=" + name + ", enabled=" + enabled + "]";
