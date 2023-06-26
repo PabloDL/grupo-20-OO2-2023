@@ -8,7 +8,7 @@
 
 	<div class="container">
 		<div class="row">
-			<h1> Listado de Dispositivos</h1>
+			<h1> Listado Sensores de estacionamiento</h1>
 		</div>
 	<div class="row">
 		<a href="#" id="add-btn" class="btn btn-primary btn-sm mb-3">Agregar</a>
@@ -17,27 +17,44 @@
 	<table class="table"  id="crud-table">
 		<thead class="thead-dark">
 			<tr>
+				<th scope="col">Id</th>
 				<th scope="col">Habilitado</th>
-				<th scope="col">Nombre</th>
+				<th scope="col">Disponible</th>
+				<th scope="col">Plaza Nº</th>
+				<th scope="col">Sector</th>
 				<th scope="col">Acciones</th>
 			</tr>
 		</thead>
 		<tbody>
-			<tr th:each="device: ${devices}" th:object-id="${device.id}">
-				<td><input type="checkbox" disabled="disabled" name="enabled"
-					th:checked="${device.enabled}" /></td>
-				<td><a th:href = "@{/dispositivos/{name} (name=${device.name})}" class="btn btn-secondary" th:text="${device.name}"></a> </td>
+			<tr th:each="spots: ${parkingSpots}" th:object-id="${spots.id}">
+				<td th:text = "${spots.parkingSpot.id}"/></td>
+				<td><input type="checkbox" disabled="disabled" name="enabled" th:checked="${spots.parkingSpot.enabled}"/></td>
+				<td><input type="checkbox" disabled="disabled" name="available" th:checked="${spots.parkingSpot.available}"/></td>
+				<td th:text = "${spots.parkingSpot.number!=null}?${spots.parkingSpot.number!=null}:'no asignada'"/></td>
+				<td th:text = "${spots.parkingSpot.sector!=null}?${spots.parkingSpot.sector!=null}:'no asignada'"/></td>
 				<td><a href="#" class="btn btn-primary update-btn">Editar</a></td>
+				<!-- data-department=${user.department!=null}?${user.department.name}:'not specified' -->
 			</tr>
 			
 			<tr class="blank-row" style="display: none;" >
+				<td/></td>
 				<td><input type="checkbox" disabled="disabled" name="enabled"/></td>
-				<td><a href="" class="btn btn-secondary"></a></td>
+				<td></td>
+				<td/></td>
+				<td/></td>
 				<td><a href="#" class="btn btn-primary update-btn">Editar</a></td>
 			</tr>
 			<tr class="template-row" style="display: none;">
+				<td/></td>
 				<td><input type="checkbox" name="enabled"/></td>
-				<td><input type="text" name="name"/></td>
+				<td><input type="checkbox" disabled="disabled" name="available"/></td>
+				<td><input type="number" name="number"/></td>
+				<td><select th:field="*{parkingNumbers}">
+				    <option th:each value="'M'" th:text="Male"></option>
+				</select></td>
+				<td><select th:field="*{parkingSectors}">
+				    <option th:each value="'M'" th:text="Male"></option>
+				</select></td>
 				<td class="d-flex justify-content-around">
 					<a href="#" class="btn btn-danger cancel-btn">Cancelar</a> 
 					<a href="#" class="btn btn-success save-btn">Guardar</a>

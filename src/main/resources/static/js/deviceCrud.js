@@ -69,7 +69,7 @@ $(document).ready(function() {
 	//funcion formHandler
 	function createUpdateObject(id, enabledValue, nameValue, originalRow, editableRow){
 		
-		let data = {id:id, enabledValue:enabledValue, name:nameValue} 
+		let data = {id:id, enabled:enabledValue, name:nameValue} 
 		
 	 	$.ajax({
 			  url: 'devices/crud', 
@@ -81,9 +81,10 @@ $(document).ready(function() {
 		      },
 			  success: function(response) {
 				originalRow.attr('object-id', response )
-				originalRow.find('input[type="checkbox"]').prop('checked', enabledValue);
-				originalRow.find('td:nth-child(2)').text(nameValue);
-				
+				originalRow.find('input[type="checkbox"]').prop('checked', enabledValue);				
+				originalRow.find('td:nth-child(2) a').text(nameValue);
+			    originalRow.find('td:nth-child(2) a').attr("href", `/dispositivos/${nameValue}`);
+				 
 			  },
 			  error: function(xhr, status, error) {
 		
@@ -99,6 +100,9 @@ $(document).ready(function() {
 			}
 			});
 	}
+  
+  
+  
   
 });
 
