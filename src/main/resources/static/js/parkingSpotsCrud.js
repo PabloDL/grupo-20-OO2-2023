@@ -20,9 +20,8 @@ $(document).ready(function() {
 		/*se elimina la fila editable*/
         let editableRow = $(this).closest('tr')
         let id = editableRow.attr('edit-object-id')
-        let originalRow;
         if(id != -1){
-        	originalRow = $('#crud-table').find(`[object-id="${id}"]`);
+        	let originalRow = $('#crud-table').find(`[object-id="${id}"]`);
         	restoreTable(originalRow, editableRow)
     	}
     	else{
@@ -35,16 +34,15 @@ $(document).ready(function() {
 		//recopila info editada y la envia al formHandler
 		let editableRow = $(this).closest('tr');
 		let id = editableRow.attr('edit-object-id');
-		let originalRow = $('#crud-table').find(`[object-id="${id}"]`);
+		let enabledValue = editableRow.find('input[name="enabled"]').prop('checked');
+		let number = editableRow.find('input[name="number"]').val();
+		let sector = editableRow.find('input[name="sector"]').val();
+		 
 		
-		let enabledValue = editableRow.find('input[name="enabled"]').prop('checked');		
-		let number = editableRow.find('td:nth-child(4) select').val();
-		number = number.slice(0, number.indexOf("-"));
-		let sector = editableRow.find('td:nth-child(4) select').val().trim();
-		sector = sector.slice(sector.indexOf("-")+1);		
-		let deviceId = originalRow.find("td:last-child").attr("device-id");
-		  
-		createUpdateObject(id, enabledValue, number, sector, deviceId, /*spotId,*/ originalRow, editableRow);
+		let originalRow = $('#crud-table').find(`[object-id="${id}"]`);
+        
+		createUpdateObject(id, enabledValue, number, sector, originalRow, editableRow);
+
     });
   
   //click editar
@@ -53,19 +51,17 @@ $(document).ready(function() {
         let originalRow = button.closest('tr');
         let objectId = originalRow.attr('object-id');
         
-        originalRow.hide();
-                
-		//se clonan los datos de la fila original a la editable
+        //clonar id a la fila Editable
         let newRow = templateRow.clone().removeClass('template-row').removeAttr('style');
-    	  newRow.find('td:nth-child(1)').text(originalRow.find('td:nth-child(1)').text());
-    	  newRow.find('input[name="enabled"]').prop('checked', originalRow.find('input[name="enabled"]').prop('checked'));
-	      newRow.find('input[name="available"]').prop('checked', originalRow.find('input[name="available"]').prop('checked')).prop('disabled', true);
-		  newRow.find('td:nth-child(4) select').val(originalRow.find('td:nth-child(4)').text());
-		  newRow.find('td:nth-child(5) select').val(originalRow.find('td:nth-child(5)').text());
-		  
+        newRow.find('td:first-child').text(objectId);
+        newRow.find('input[name="enabled"]').prop('checked', originalRow.find('input[name="enabled"]').prop('checked'));
+        newRow.find('input[name="number"]').val(originalRow.find('td:nth-child(3)').text());
+        newRow.find('input[name="sector"]').val(originalRow.find('td:nth-child(4)').text());
+        
 		newRow.attr('edit-object-id', objectId);
+		originalRow.hide();
         originalRow.after(newRow);
-        //se reemplaza el id de la fila original a la fila editableS
+        //se reemplaza el id de la fila original a la fila editable
     });
     
     function restoreTable(originalRow, editableRow){
@@ -74,29 +70,29 @@ $(document).ready(function() {
 	}
 
 	//funcion formHandler
-	function createUpdateObject(id, enabledValue, number, sector,deviceId,/* spotId,*/ originalRow, editableRow){
+	function createUpdateObject(id, enabledValue, number, sector, originalRow, editableRow){
 		
-		let data = {/*id: spotId,*/ sector: sector, number: number, parkingSensor: {id : id, enabled : enabledValue, device:{id:deviceId}} } 
+		let data = {id:id, enabled:enabledValue, number:number, sector:sector} 
 		
-		$.ajax({
-			  url: '/devices/parkingSensor/crud', 
+	 	$.ajax({
+			  url: 'parkingSpots/crud', 
 			  type: 'POST',
 			  data: JSON.stringify(data),
 			  contentType: 'application/json',
 			  beforeSend: function() {
-			  	crudTable.find(`[object-id="${id}"]`).find(".spinner-border").show();
-			  },
+		      	crudTable.find(`[object-id="${id}"]`).find(".spinner-border").show();
+		      },
 			  success: function(response) {
-				//se reemplazan los datos editados
+				originalRow = crudTable.find(`[object-id="${id}"]`);
 				originalRow.attr('object-id', response )
-				originalRow.find('td:nth-child(1)').text(response);
-			    originalRow.find('input[name="enabled"]').prop('checked', enabledValue).prop('disabled', true);
-			  	originalRow.find('td:nth-child(4)').text(number != ""? number : "no asignada");
-			  	originalRow.find('td:nth-child(5)').text(sector != ""? sector : "no asignado")
-								
+				originalRow.find('td:first-child').text(response);
+				originalRow.find('input[type="checkbox"]').prop('checked', enabledValue);				
+				originalRow.find('td:nth-child(3)').text(number);
+			    originalRow.find('td:nth-child(4)').text(sector);
+				 
 			  },
 			  error: function(xhr, status, error) {
-			
+		
 				console.log(xhr.responseText);
 				console.log(status);
 				console.log(error);
@@ -104,10 +100,10 @@ $(document).ready(function() {
 			    alert('Se produjo un error al confirmar los cambios: ' + error);
 			  },
 			  complete: function(){
-				$(".spinner-border").hide();
+				crudTable.find(`[object-id="${id}"]`).find(".spinner-border").hide();
 				restoreTable(originalRow, editableRow);
-			  }
-		});
+			}
+			});
 	}
   
   

@@ -48,10 +48,9 @@ public class ParkingSensor{
 				+ enabled + "]";
 	}
 	
-	public ParkingSensor updateFields(ParkingSensor device) {
-		this.enabled = device.enabled;
-		this.device.updateFields(device.getDevice());
-		
+	public ParkingSensor updateFields(ParkingSensor parkingSensor) {
+		this.enabled = parkingSensor.enabled;
+		this.setDevice(parkingSensor.getDevice());
 		return this;
 	}
 }
