@@ -35,7 +35,7 @@
 				<td th:text = "${spots.parkingSensor.id}" /></td>
 				<td><input class="checkbox-big" type="checkbox" disabled="disabled" name="enabled" th:checked="${spots.parkingSensor.enabled}"/></td>
 				<td><input class="checkbox-big" type="checkbox" disabled="disabled" name="available" th:checked="${spots.parkingSensor.available}"/></td>
-				<td th:text = "${spots.number!=null}?${spots.number}:'no asignada'" /></td>
+				<td th:text = "${spots.number!=null}?${spots.number}:'no asignado'" /></td>
 				<td th:text = "${spots.sector!=null}?${spots.sector}:'no asignado'" /></td>				
 				<td><a href="#" class="btn btn-primary update-btn">Editar</a></td>
 				<!--  -->
@@ -48,7 +48,7 @@
 				<td th:text = "${unPS.id}"/></td>
 				<td><input class="checkbox-big" type="checkbox" disabled="disabled" name="enabled" th:checked="${unPS.enabled}"/></td>
 				<td><input class="checkbox-big" type="checkbox" disabled="disabled" name="available" th:checked="${unPS.available}"/></td>
-				<td th:text="'no asignada'" ></td>
+				<td th:text="'no asignado'" ></td>
     			<td th:text="'no asignado'" ></td>
 				<td><a href="#" class="btn btn-primary update-btn">Editar</a></td>
 				<!--  -->
@@ -68,13 +68,9 @@
 				<td/></td>
 				<td><input class="checkbox-big" type="checkbox" name="enabled" /></td>
 				<td><input class="checkbox-big" type="checkbox" disabled="disabled" name="available"/></td>
-				<td><select class="form-select" th:field="*{parkingNumbers}">
+				<td colspan="2"><select class="form-select" th:field="*{numberSectors}">
 					<option value=" " selected>no asignado</option>
-				    <option th:each="spotNumber : ${parkingNumbers}" th:text="${spotNumber}" th:value="${spotNumber}"></option>
-				</select></td>
-				<td><select class="form-select" th:field="*{parkingSectors}">
-					<option value=" " selected>no asignado</option>
-				    <option th:each="sector : ${parkingSectors}" th:text="${sector}" th:value="${sector}"></option>
+				    <option th:each="spotNumberSector : ${numberSectors}" th:text="${spotNumberSector}" th:value="${spotNumberSector}"></option>
 				</select></td>
 				<td class="d-flex justify-content-around">
 					<a href="#" class="btn btn-danger cancel-btn">Cancelar</a> 

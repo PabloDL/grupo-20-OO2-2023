@@ -28,7 +28,6 @@ $(document).ready(function() {
     	else{
 					editableRow.remove();
 		}
-		originalRow.find("td:last-child").prev("td").attr("spot-id") ?? -1;
     });
 
 	//click guardar
@@ -40,11 +39,12 @@ $(document).ready(function() {
 		
 		let enabledValue = editableRow.find('input[name="enabled"]').prop('checked');		
 		let number = editableRow.find('td:nth-child(4) select').val();
-		let sector = editableRow.find('td:nth-child(5) select').val();
-		
-		let spotId = originalRow.find("td:last-child").prev("td").attr("spot-id"); 
-		let deviceId = originalRow.find("td:last-child").attr("device-id");  
-		createUpdateObject(id, enabledValue, number, sector, deviceId, spotId, originalRow, editableRow);
+		number = number.slice(0, number.indexOf("-"));
+		let sector = editableRow.find('td:nth-child(4) select').val().trim();
+		sector = sector.slice(sector.indexOf("-")+1);		
+		let deviceId = originalRow.find("td:last-child").attr("device-id");
+		  
+		createUpdateObject(id, enabledValue, number, sector, deviceId, /*spotId,*/ originalRow, editableRow);
     });
   
   //click editar
@@ -60,21 +60,9 @@ $(document).ready(function() {
     	  newRow.find('td:nth-child(1)').text(originalRow.find('td:nth-child(1)').text());
     	  newRow.find('input[name="enabled"]').prop('checked', originalRow.find('input[name="enabled"]').prop('checked'));
 	      newRow.find('input[name="available"]').prop('checked', originalRow.find('input[name="available"]').prop('checked')).prop('disabled', true);
-		  newRow.find('td:nth-child(4) select').val(originalRow.find('td:nth-child(4)').text())
-		  newRow.find('td:nth-child(5) select').val(originalRow.find('td:nth-child(5)').text())
+		  newRow.find('td:nth-child(4) select').val(originalRow.find('td:nth-child(4)').text());
+		  newRow.find('td:nth-child(5) select').val(originalRow.find('td:nth-child(5)').text());
 		  
-//		  newRow.find('td:nth-child(4) select').children(`${originalRow.find('td:nth-child(4)').text()}`).attr("select", "selected")
-//		  newRow.find('td:nth-child(5) select').children(`${originalRow.find('td:nth-child(5)').text()}`).attr("select", "selected")
-		  
-		  
-//		  originalRow.find('td:nth-child(4)').text() != "no asignado" 
-//		  		?newRow.find('td:nth-child(4) select').children("no asignado").attr("select", "selected")
-//		  		:newRow.find('td:nth-child(4) select').val(originalRow.find('td:nth-child(4)').text());
-//		  
-//		  originalRow.find('td:nth-child(5)').text() != "no asignado" 
-//		  		?newRow.find('td:nth-child(5) select').children("no asignado").attr("select", "selected")
-//		  		:newRow.find('td:nth-child(5) select').val(originalRow.find('td:nth-child(5)').text());
-	 	
 		newRow.attr('edit-object-id', objectId);
         originalRow.after(newRow);
         //se reemplaza el id de la fila original a la fila editableS
@@ -86,9 +74,9 @@ $(document).ready(function() {
 	}
 
 	//funcion formHandler
-	function createUpdateObject(id, enabledValue, number, sector,deviceId, spotId, originalRow, editableRow){
+	function createUpdateObject(id, enabledValue, number, sector,deviceId,/* spotId,*/ originalRow, editableRow){
 		
-		let data = {id: spotId, sector: sector, number: number, parkingSensor: {id : id, enabled : enabledValue, device:{id:deviceId}} } 
+		let data = {/*id: spotId,*/ sector: sector, number: number, parkingSensor: {id : id, enabled : enabledValue, device:{id:deviceId}} } 
 		
 		$.ajax({
 			  url: '/devices/parkingSensor/crud', 
@@ -99,12 +87,12 @@ $(document).ready(function() {
 			  	originalRow.find(".spinner-border").show();
 			  },
 			  success: function(response) {
+				//se reemplazan los datos editados
 				originalRow.attr('object-id', response )
 				originalRow.find('td:nth-child(1)').text(response);
 			    originalRow.find('input[name="enabled"]').prop('checked', enabledValue).prop('disabled', true);
-			    //originalRow.find('input[name="available"]').prop('checked', originalRow.find('input[name="available"]').prop('checked')).prop('disabled', true);
-			  	originalRow.find('td:nth-child(4) select').val(number)
-			  	originalRow.find('td:nth-child(5) select').val(sector)
+			  	originalRow.find('td:nth-child(4)').text(number != ""? number : "no asignada");
+			  	originalRow.find('td:nth-child(5)').text(sector != ""? sector : "no asignado")
 								
 			  },
 			  error: function(xhr, status, error) {

@@ -29,45 +29,11 @@ public class DeviceController {
 	@Autowired
 	private ISpotService parkingSpotService;
 	
-	
 	@GetMapping("/dispositivos")
 	public String listDevices(Model model) {
 		model.addAttribute("devices", deviceService.getAllDevices());
 		return "devices";
 	}
-//
-//	@GetMapping("/dispositivos/crear")
-//	public String createDeviceForm(Model model) {
-//		Device device = new Device();
-//		model.addAttribute("device", device);
-//		return "deviceCreate";
-//	}
-//	
-//	@PostMapping("/dispositivos/crear")
-//	public String saveDevice(@ModelAttribute("device") Device device) {
-//		deviceService.saveDevice(device);
-//		return "redirect:/dispositivos";
-//	}
-//
-//	@GetMapping("/dispositivos/actualizar/{id}")
-//	public String editDeviceForm(@PathVariable("id") Long id, Model model) {
-//		model.addAttribute("devices", deviceService.getDevice(id));
-//		return "deviceUpdate";
-//	}
-//	
-//	@PostMapping("/dispositivos/actualizar")
-//	public String editDeviceForm(@PathVariable Long deviceId, 
-//			@ModelAttribute("device") Device device, Model model) {
-//		
-//		//Device updateDevice = deviceService.createUpdateDevice(device);
-//		Device updateDevice = deviceService.getDevice(deviceId);
-//		updateDevice.setName(device.getName());
-//		updateDevice.setEnabled(device.isEnabled());
-//		
-//		deviceService.saveDevice(updateDevice);
-//		return "redirect:/dispositivo";
-//	}
-	
 	
 	@PostMapping("/devices/crud")
 	public ResponseEntity<String> handleCrudRequest(@RequestBody Device device) {
@@ -84,7 +50,9 @@ public class DeviceController {
 		List<ParkingSensor> dbParkingSensors = parkingSensorService.getAllParkingSensors();
 		Set<Integer> parkingNumbers = new HashSet<Integer>();
 		Set<String> parkingSectors = new HashSet<String>();
+		List<String> numberSectors = parkingSpotService.getNumberSector();
 		for(Spot spot: dbParkingSpots) {
+			
 			parkingNumbers.add(spot.getNumber());
 			parkingSectors.add(spot.getSector());
 		}
@@ -98,6 +66,7 @@ public class DeviceController {
 		model.addAttribute("parkingSpots", dbParkingSpotsSensors);
 		model.addAttribute("parkingNumbers", parkingNumbers);
 		model.addAttribute("parkingSectors", parkingSectors);
+		model.addAttribute("numberSectors", numberSectors );
 		model.addAttribute("parkingSensors", dbParkingSensors);
 		model.addAttribute("unassignedParkingSensors", unassignedParkingSensors);
 		
@@ -109,12 +78,9 @@ public class DeviceController {
 		Device device = deviceService.getDevice((long) parkingSpot.getParkingSensor().getDevice().getId());
 		parkingSpot.getParkingSensor().setDevice(device);
 		ParkingSensor storedSensor = parkingSensorService.createUpdateParkingSensor(parkingSpot.getParkingSensor());
-		Spot assignedSpot = parkingSpotService.createUpdateSpot(parkingSpot);
-		
-		System.out.println(storedSensor.toString());
-		System.out.println(assignedSpot.toString());
-		
-		return ResponseEntity.ok("" + assignedSpot.getId() );
+		parkingSpotService.assignSpot(parkingSpot);
+				
+		return ResponseEntity.ok("" + storedSensor.getId() );
 	}
 	
 }

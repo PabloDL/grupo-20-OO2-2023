@@ -22,6 +22,11 @@ public class SpotServiceImplementation implements ISpotService{
 	}
 	
 	@Override
+	public Spot getParkingSpot(int number, String sector) {
+		return spotRepository.findByLocation(number, sector);
+	}
+	
+	@Override
 	public List<Spot> getAllSpots() {
 		return spotRepository.findAll();
 	}
@@ -32,9 +37,38 @@ public class SpotServiceImplementation implements ISpotService{
     }
 	
 	@Override
+	public List<String> getNumberSector(){
+		return spotRepository.findNumberSector();
+	}
+	
+	@Override
 	public Spot saveSpot(Spot parkingSpot) {
 		return spotRepository.save(parkingSpot);
 	};
+	
+	@Override
+	public Spot assignSpot(Spot parkingSpot) {
+		Spot dbNewSpot = null;
+		Spot dbOldSpot = spotRepository.findBySensorId(parkingSpot.getParkingSensor().getId());
+		if(parkingSpot.getNumber() != 0) {
+			//selecciono asignar
+			dbNewSpot = spotRepository.findByLocation(parkingSpot.getNumber(), parkingSpot.getSector());
+			dbNewSpot.setParkingSensor(parkingSpot.getParkingSensor());
+		}
+		else {
+			//selecciono desasignar
+			dbOldSpot.setParkingSensor(null);
+		}
+		
+		if (dbOldSpot != null) {
+			spotRepository.save(dbOldSpot);
+		}
+		if (dbNewSpot != null) {
+			spotRepository.save(dbNewSpot);
+		}
+		
+		return dbNewSpot;
+	}
 	
 	@Override
 	public Spot createUpdateSpot(Spot parkingSpot) {
@@ -49,5 +83,6 @@ public class SpotServiceImplementation implements ISpotService{
 		
 		return spotRepository.save(dbSpot);
 	}
+	
 	
 }
