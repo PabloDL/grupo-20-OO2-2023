@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.UNLa.entity.Device;
 import com.UNLa.entity.Spot;
 import com.UNLa.repository.ISpotRepository;
 import com.UNLa.service.ISpotService;
@@ -46,6 +45,8 @@ public class SpotServiceImplementation implements ISpotService{
 		else {
 			dbSpot = new Spot(parkingSpot);
 		}
+		dbSpot.updateFields(parkingSpot);
+		
 		return spotRepository.save(dbSpot);
 	}
 	

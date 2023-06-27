@@ -39,6 +39,10 @@ public class Device{
 		return "Device [id=" + id + ", name=" + name + ", enabled=" + enabled + "]";
 	}
 	
-	
+	public Device updateFields(Device device) {
+		this.enabled = device.enabled;
+		this.name = device.name;
+		return this;
+	}
 }
 

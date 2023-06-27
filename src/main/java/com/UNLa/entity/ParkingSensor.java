@@ -26,7 +26,7 @@ public class ParkingSensor{
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="device_id", nullable=false)
-	private Device deviceId;
+	private Device device;
 	
 	@Column(name="enabled")
 	private boolean enabled;
@@ -39,14 +39,19 @@ public class ParkingSensor{
 	public ParkingSensor(ParkingSensor parkingSensor) {
 		this.available = parkingSensor.available;
 		this.enabled = parkingSensor.enabled;
-		this.deviceId = parkingSensor.deviceId;
+		//this.device = parkingSensor.device;
 	}
 	
 	@Override
 	public String toString() {
-		return "ParkingSensor [id=" + id + ", available=" + available + ", deviceId=" + deviceId + ", enabled="
+		return "ParkingSensor [id=" + id + ", available=" + available + ", deviceId=" + device + ", enabled="
 				+ enabled + "]";
 	}
 	
-	
+	public ParkingSensor updateFields(ParkingSensor device) {
+		this.enabled = device.enabled;
+		this.device.updateFields(device.getDevice());
+		
+		return this;
+	}
 }

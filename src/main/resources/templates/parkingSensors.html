@@ -36,10 +36,13 @@
 				<td><input class="checkbox-big" type="checkbox" disabled="disabled" name="enabled" th:checked="${spots.parkingSensor.enabled}"/></td>
 				<td><input class="checkbox-big" type="checkbox" disabled="disabled" name="available" th:checked="${spots.parkingSensor.available}"/></td>
 				<td th:text = "${spots.number!=null}?${spots.number}:'no asignada'" /></td>
-				<td th:text = "${spots.sector!=null}?${spots.sector}:'no asignado'" /></td>
-								
+				<td th:text = "${spots.sector!=null}?${spots.sector}:'no asignado'" /></td>				
 				<td><a href="#" class="btn btn-primary update-btn">Editar</a></td>
-				<!-- data-department=${user.department!=null}?${user.department.name}:'not specified' -->
+				<!--  -->
+				<td th:spot-id ="${spots.id}" hidden="hidden"/></td>
+				<td th:device-id = "${spots.parkingSensor.device.id}" hidden="hidden"/></td>
+				
+				
 			</tr>
 			<tr th:each="unPS: ${unassignedParkingSensors}" th:object-id="${unPS.id}">
 				<td th:text = "${unPS.id}"/></td>
@@ -48,16 +51,18 @@
 				<td th:text="'no asignada'" ></td>
     			<td th:text="'no asignado'" ></td>
 				<td><a href="#" class="btn btn-primary update-btn">Editar</a></td>
-				<!-- data-department=${user.department!=null}?${user.department.name}:'not specified' -->
+				<!--  -->
+				<td th:device-id="${unPS.device.id}" hidden="hidden"/></td>
 			</tr>
 			
 			<tr class="blank-row" style="display: none;" >
 				<td/></td>
 				<td><input class="checkbox-big" type="checkbox" disabled="disabled" name="enabled"/></td>
-				<td></td>
+				<td><input class="checkbox-big" type="checkbox" disabled="disabled" name="available"/></td>
 				<td/></td>
 				<td/></td>
 				<td><a href="#" class="btn btn-primary update-btn">Editar</a></td>
+				<td th:device-id="2" hidden="hidden"/></td>
 			</tr>
 			<tr class="template-row" style="display: none;">
 				<td/></td>

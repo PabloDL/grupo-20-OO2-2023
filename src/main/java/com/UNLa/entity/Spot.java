@@ -67,4 +67,12 @@ public class Spot {
 		this.parkingSensor = parkingSpot.parkingSensor;
 		this.enabled = parkingSpot.enabled;
 	}
+	
+	public Spot updateFields(Spot parkingSpot) {
+		this.enabled = parkingSpot.enabled;
+		this.sector = parkingSpot.sector;
+		this.number = parkingSpot.number;
+		this.parkingSensor.updateFields(parkingSpot.getParkingSensor());
+		return this;
+	}
 }

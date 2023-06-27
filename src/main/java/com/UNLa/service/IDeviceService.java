@@ -13,5 +13,5 @@ public interface IDeviceService {
 	Device saveDevice(Device device);
 	
 	Device createUpdateDevice(Device device);
- 
+
 }

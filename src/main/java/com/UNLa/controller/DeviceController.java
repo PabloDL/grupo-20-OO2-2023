@@ -2,7 +2,6 @@ package com.UNLa.controller;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.UNLa.entity.Device;
 import com.UNLa.entity.ParkingSensor;
 import com.UNLa.entity.Spot;
-import com.UNLa.model.ParkingSensorExpandedModel;
 import com.UNLa.service.IDeviceService;
 import com.UNLa.service.IParkingSensorService;
 import com.UNLa.service.ISpotService;
@@ -108,7 +106,8 @@ public class DeviceController {
 	
 	@PostMapping("/devices/parkingSensor/crud")
 	public ResponseEntity<String> handleCrudRequest(@RequestBody Spot parkingSpot) {
-		
+		Device device = deviceService.getDevice((long) parkingSpot.getParkingSensor().getDevice().getId());
+		parkingSpot.getParkingSensor().setDevice(device);
 		ParkingSensor storedSensor = parkingSensorService.createUpdateParkingSensor(parkingSpot.getParkingSensor());
 		Spot assignedSpot = parkingSpotService.createUpdateSpot(parkingSpot);
 		

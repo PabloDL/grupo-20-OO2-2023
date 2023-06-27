@@ -36,10 +36,13 @@ public class DeviceServiceImplementation implements IDeviceService{
 		Device dbDevice;
 		if(device.getId() != -1) {
 			dbDevice = this.getDevice(Long.valueOf(device.getId()));
+			dbDevice.updateFields(device);
 		}
 		else {
 			dbDevice = new Device(device);
 		}
 		return deviceRepository.save(dbDevice);
 	}
+	
+	
 }

@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.UNLa.entity.Device;
 import com.UNLa.entity.ParkingSensor;
 import com.UNLa.repository.IParkingSensorRepository;
 import com.UNLa.service.IParkingSensorService;
@@ -12,7 +11,7 @@ import com.UNLa.service.IParkingSensorService;
 @Service
 public class ParkingSensorServiceImplementation implements IParkingSensorService {
 	private IParkingSensorRepository parkingSensorRepository;
-		
+	
 	public ParkingSensorServiceImplementation(IParkingSensorRepository parkingSensorRepository) {
 		super();
 		this.parkingSensorRepository = parkingSensorRepository;
@@ -47,6 +46,7 @@ public class ParkingSensorServiceImplementation implements IParkingSensorService
 		else {
 			dbParkingSensor = new ParkingSensor(parkingSensor);
 		}
+		dbParkingSensor.updateFields(parkingSensor);
 		return parkingSensorRepository.save(dbParkingSensor);
 	}
 }
