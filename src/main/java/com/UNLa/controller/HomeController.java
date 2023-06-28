@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.UNLa.entity.Device;
 import com.UNLa.service.IDeviceService;
@@ -26,4 +27,27 @@ public class HomeController {
 		return "index";
 	}
 
+	@GetMapping("/mapa")
+	public String home() {
+		return "map";
+	}
+	
+	@GetMapping("/monitoreo")
+	public String monitorDevices() {
+		return "monitoring";
+	}
+	
+	@PostMapping("/monitoreo")
+	public String handleRequestMonitorDevices() {
+		return "monitoring";
+	}
+	
+	
+	@GetMapping("//buscarEstacionamiento")
+	public String findParkingSpots() {
+		return "findParking";
+	}
+	
+	
+	
 }
