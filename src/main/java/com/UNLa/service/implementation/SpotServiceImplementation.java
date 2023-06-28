@@ -87,5 +87,15 @@ public class SpotServiceImplementation implements ISpotService{
 		return spotRepository.save(dbSpot);
 	}
 	
+	@Override
+	public List<Spot> getAvailableParkingSpots() {
+		return spotRepository.findAvailableParkingSpots();
+	}
+	
+	@Override
+	public List<Spot> getRecommendedParkingSpots() {
+		return spotRepository.findAvailableSpotsPerSector();
+	}
+	
 	
 }

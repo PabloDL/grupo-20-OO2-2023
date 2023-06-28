@@ -1,7 +1,6 @@
 package com.UNLa.service;
 
 import java.util.List;
-import java.util.Map;
 
 import com.UNLa.entity.Spot;
 
@@ -21,5 +20,9 @@ public interface ISpotService {
 	Spot getParkingSpot(int number, String sector);
 
 	Spot assignSpot(Spot parkingSpot);
+
+	List<Spot> getAvailableParkingSpots();
+
+	List<Spot> getRecommendedParkingSpots();
 
 }

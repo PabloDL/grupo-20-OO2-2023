@@ -3,7 +3,6 @@ $(document).ready(function() {
   	let crudTable = $('#crud-table');
 	let templateRow = crudTable.find('.template-row');	
 	
-	
 	//click agregar
   	addBtn.on('click', function() {
 		/*se clona la fila plantilla, 
@@ -25,7 +24,7 @@ $(document).ready(function() {
         	restoreTable(originalRow, editableRow)
     	}
     	else{
-					editableRow.remove();
+			editableRow.remove();
 		}
     });
 

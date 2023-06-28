@@ -38,10 +38,10 @@ $(document).ready(function() {
 		let originalRow = $('#crud-table').find(`[object-id="${id}"]`);
 		
 		let enabledValue = editableRow.find('input[name="enabled"]').prop('checked');		
-		let number = editableRow.find('td:nth-child(4) select').val();
+		let number = editableRow.find('td:nth-child(4) select').val() ?? '';
 		number = number.slice(0, number.indexOf("-"));
-		let sector = editableRow.find('td:nth-child(4) select').val().trim();
-		sector = sector.slice(sector.indexOf("-")+1);		
+		let sector = editableRow.find('td:nth-child(4) select').val() ?? '';
+		sector = sector.trim().slice(sector.indexOf("-")+1);		
 		let deviceId = originalRow.find("td:last-child").attr("device-id");
 		  
 		createUpdateObject(id, enabledValue, number, sector, deviceId, /*spotId,*/ originalRow, editableRow);
