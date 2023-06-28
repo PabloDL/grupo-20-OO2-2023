@@ -89,6 +89,61 @@
 			</div>
 		</div>
 
+<!-- Sidebar 2-------------------------------------------------------------------------------------------------------------------->
+			<div th:fragment="sidebarFragment2" class="flex-shrink-0 p-3 bg-secondary" style="width: 280px; height:100%;">
+				<a href="/"
+					class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom text-white">
+					<svg class="bi pe-none me-2" width="30" height="24">
+						<use xlink:href="#bootstrap"></use></svg> 
+						<span class="fs-5 fw-semibold">UNLa</span>
+				</a>
+				<ul class="list-unstyled ps-0">
+					<li class="mb-1">
+						<button
+							class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed text-white dropdown-btn"
+							data-bs-toggle="collapse" data-bs-target="#home-collapse"
+							aria-expanded="true">Home</button>
+							
+						<div class="collapse ml-4" id="home-collapse">
+							<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+								<li><a href="/mapa" class="link-body-emphasis d-inline-flex text-decoration-none rounded text-white-50">Mapa UNLa </a></li>
+								<li><a href="/monitoreo"class="link-body-emphasis d-inline-flex text-decoration-none rounded text-white-50">Monitoreo</a></li>
+								<li><a href="/reportes"class="link-body-emphasis d-inline-flex text-decoration-none rounded text-white-50">Reportes</a></li>
+								<li><a href="/buscarEstacionamiento"class="link-body-emphasis d-inline-flex text-decoration-none rounded text-white-50">Buscar Estacionamiento</a></li>
+								
+							</ul>
+						</div>
+					</li>
+					<li class="mb-1">
+						<button
+							class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed text-white dropdown-btn"
+							data-bs-toggle="collapse" data-bs-target="#dashboard-collapse"
+							aria-expanded="false">Dispositivos</button>
+						<div sec:authorize="hasRole('ROLE_ADMIN')" class="collapse ml-4" id="dashboard-collapse">
+							<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+	
+								<li><a href="/dispositivos" class="link-body-emphasis d-inline-flex text-decoration-none rounded text-white-50">Listado de tipos</a></li>
+							</ul>
+						</div>
+					</li>
+	
+					<li class="mb-1">
+						<button
+							class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed text-white dropdown-btn"
+							data-bs-toggle="collapse" data-bs-target="#orders-collapse"
+							aria-expanded="false">Estacionamiento</button>
+							
+						<div class="collapse ml-4" id="orders-collapse">
+							<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+								<li><a href="estacionamientos"
+									class="link-body-emphasis d-inline-flex text-decoration-none rounded text-white-50">Listado de Plazas</a></li>
+							</ul>
+						</div>
+					</li>
+					<li class="border-top my-3"></li>
+				</ul>
+			</div>
+
 <!-- Footer --------------------------------------------------------------------------------------------------------------------->
 	<div th:fragment="footerFragment">
 		<footer class="py-5 bg-dark">

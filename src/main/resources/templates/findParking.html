@@ -6,17 +6,44 @@
 <body>
 	<div th:replace="~{fragments :: navbarFragment}"></div>
 
-	<div class="container">
-		<div class="row">
-			<h1> Plano de UNLa</h1>
+	<div class="container d-flex">
+		<div th:replace="~{fragments :: sidebarFragment2}"></div>
+		<div class="ml-5">
+			<div class="row">
+				<h1>Buscar Estacionamiento</h1>
+			</div>
+			<div id="events-cascade">
+				<table>
+					<thead>
+						<tr>
+							<th scope="col" colspan="3">Plaza de estacionamiento</th>
+							<th scope="col" colspan="2">Sensor de estacionamiento</th>
+						</tr>
+						<tr>
+							<th scope="col">Habilitado</th>
+							<th scope="col">Numero</th>
+							<th scope="col">Sector</th>
+							<th scope="col">Disponible</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="device: ${devices}" th:object-id="${device.id}">
+							<td><input class="checkbox-big" type="checkbox"
+								disabled="disabled" name="enabled"
+								th:checked="${device.enabled}" /></td>
+							<td><a
+								th:href="@{/dispositivos/{name} (name=${device.name})}"
+								class="btn btn-secondary" th:text="${device.name}"></a></td>
+							<td><a href="#" class="btn btn-primary update-btn">Editar</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 		</div>
-
-		<img class="w-75" src="/assets/Plano-UNLa.jpg">	
 	</div>
 
 
-<div th:replace="~{fragments :: footerFragment}"></div>
+	<div th:replace="fragments :: footerFragment"></div>
+	<script src="/js/dropDown.js"></script>
 </body>
-<script src="/js/deviceCrud.js" type="text/javascript"></script>
-
 </html>

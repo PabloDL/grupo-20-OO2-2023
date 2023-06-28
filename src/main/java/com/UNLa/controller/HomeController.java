@@ -43,8 +43,9 @@ public class HomeController {
 	}
 	
 	
-	@GetMapping("//buscarEstacionamiento")
+	@GetMapping("/buscarEstacionamiento")
 	public String findParkingSpots() {
+		
 		return "findParking";
 	}
 	
