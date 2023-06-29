@@ -1,12 +1,12 @@
-package com.UNLa.service.implementation;
+package com.UNLa.services.implementation;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.UNLa.entity.ParkingSensor;
-import com.UNLa.repository.IParkingSensorRepository;
-import com.UNLa.service.IParkingSensorService;
+import com.UNLa.entities.ParkingSensor;
+import com.UNLa.repositories.IParkingSensorRepository;
+import com.UNLa.services.IParkingSensorService;
 
 @Service
 public class ParkingSensorServiceImplementation implements IParkingSensorService {

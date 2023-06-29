@@ -1,4 +1,4 @@
-package com.UNLa.repository;
+package com.UNLa.repositories;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.UNLa.entity.Spot;
+import com.UNLa.entities.Spot;
 
 @Repository
 public interface ISpotRepository extends JpaRepository<Spot, Long>{

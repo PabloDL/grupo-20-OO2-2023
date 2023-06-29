@@ -1,12 +1,12 @@
-package com.UNLa.service.implementation;
+package com.UNLa.services.implementation;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.UNLa.entity.Spot;
-import com.UNLa.repository.ISpotRepository;
-import com.UNLa.service.ISpotService;
+import com.UNLa.entities.Spot;
+import com.UNLa.repositories.ISpotRepository;
+import com.UNLa.services.ISpotService;
 
 @Service
 public class SpotServiceImplementation implements ISpotService{

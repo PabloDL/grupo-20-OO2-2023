@@ -1,12 +1,12 @@
-package com.UNLa.service.implementation;
+package com.UNLa.services.implementation;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.UNLa.entity.Device;
-import com.UNLa.repository.IDeviceRepository;
-import com.UNLa.service.IDeviceService;
+import com.UNLa.entities.Device;
+import com.UNLa.repositories.IDeviceRepository;
+import com.UNLa.services.IDeviceService;
 
 @Service
 public class DeviceServiceImplementation implements IDeviceService{

@@ -1,7 +1,8 @@
-package com.UNLa.service;
+package com.UNLa.services;
 
 import java.util.List;
-import com.UNLa.entity.ParkingSensor;
+
+import com.UNLa.entities.ParkingSensor;
 
 public interface IParkingSensorService {
 	ParkingSensor getParkingSensor(Long parkingSensorId);

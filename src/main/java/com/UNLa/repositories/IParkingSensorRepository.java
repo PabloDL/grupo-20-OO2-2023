@@ -1,11 +1,11 @@
-package com.UNLa.repository;
+package com.UNLa.repositories;
 
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.UNLa.entity.ParkingSensor;
+import com.UNLa.entities.ParkingSensor;
 
 public interface IParkingSensorRepository extends JpaRepository<ParkingSensor, Long> {
 	@Query("FROM ParkingSensor AS ps "

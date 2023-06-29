@@ -1,4 +1,4 @@
-package com.UNLa.controller;
+package com.UNLa.controllers;
 
 import java.util.HashSet;
 import java.util.List;
@@ -12,12 +12,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.UNLa.entity.Device;
-import com.UNLa.entity.ParkingSensor;
-import com.UNLa.entity.Spot;
-import com.UNLa.service.IDeviceService;
-import com.UNLa.service.IParkingSensorService;
-import com.UNLa.service.ISpotService;
+import com.UNLa.entities.Device;
+import com.UNLa.entities.ParkingSensor;
+import com.UNLa.entities.Spot;
+import com.UNLa.helpers.ViewRouteHelper;
+import com.UNLa.services.IDeviceService;
+import com.UNLa.services.IParkingSensorService;
+import com.UNLa.services.ISpotService;
 
 @Controller
 

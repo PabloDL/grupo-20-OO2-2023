@@ -1,8 +1,8 @@
-package com.UNLa.service;
+package com.UNLa.services;
 
 import java.util.List;
 
-import com.UNLa.entity.Spot;
+import com.UNLa.entities.Spot;
 
 public interface ISpotService {
 	Spot getParkingSpot(Long spotId);

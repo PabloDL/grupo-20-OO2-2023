@@ -1,8 +1,8 @@
-package com.UNLa.repository;
+package com.UNLa.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.UNLa.entity.Device;
+import com.UNLa.entities.Device;
 
 public interface IDeviceRepository extends JpaRepository<Device, Long>{
 

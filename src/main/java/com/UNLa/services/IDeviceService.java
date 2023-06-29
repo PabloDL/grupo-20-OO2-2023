@@ -1,8 +1,8 @@
-package com.UNLa.service;
+package com.UNLa.services;
 
 import java.util.List;
 
-import com.UNLa.entity.Device;
+import com.UNLa.entities.Device;
 
 public interface IDeviceService {
 
