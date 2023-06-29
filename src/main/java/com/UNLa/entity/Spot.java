@@ -41,6 +41,11 @@ public class Spot {
 	@Column(name="enabled")
 	private boolean enabled;
 	
+	public Spot(boolean enabled) {
+		super();
+		this.enabled = enabled;
+	}
+	
 	public Spot(int number, String sector, boolean enabled) {
 		super();
 		this.number = number;
@@ -72,7 +77,7 @@ public class Spot {
 		this.enabled = parkingSpot.enabled;
 		this.sector = parkingSpot.sector;
 		this.number = parkingSpot.number;
-		this.parkingSensor.updateFields(parkingSpot.getParkingSensor());
+		this.setParkingSensor(parkingSpot.getParkingSensor());
 		return this;
 	}
 }

@@ -55,8 +55,8 @@ public class SpotServiceImplementation implements ISpotService{
 			dbNewSpot = spotRepository.findByLocation(parkingSpot.getNumber(), parkingSpot.getSector());
 			dbNewSpot.setParkingSensor(parkingSpot.getParkingSensor());
 		}
-		else {
-			//selecciono desasignar
+		else if(dbOldSpot != null){
+			//selecciono desasignar 
 			dbOldSpot.setParkingSensor(null);
 		}
 		
@@ -79,9 +79,22 @@ public class SpotServiceImplementation implements ISpotService{
 		else {
 			dbSpot = new Spot(parkingSpot);
 		}
+		if(parkingSpot.getNumber() == 0) {
+			dbSpot = new Spot(parkingSpot.isEnabled());
+		}
 		dbSpot.updateFields(parkingSpot);
 		
 		return spotRepository.save(dbSpot);
+	}
+	
+	@Override
+	public List<Spot> getAvailableParkingSpots() {
+		return spotRepository.findAvailableParkingSpots();
+	}
+	
+	@Override
+	public List<Spot> getRecommendedParkingSpots() {
+		return spotRepository.findAvailableSpotsPerSector();
 	}
 	
 	

@@ -2,124 +2,17 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
-
-<head>
-<!-- head -->
-		<meta charset="ISO-8859-1">
-		<title>UNLa</title>
-	
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-			integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"	crossorigin="anonymous">
-
-</head>
+<head th:replace="~{fragments :: headerFragment}"></head>
 <body>
-	<div th:replace="fragments :: navbarFragment"></div>
-		
-	<!-- Sidebar -->
-		
+	<div th:replace="~{fragments :: navbarFragment}"></div>
+<!------------------------------------------------------------------------------------------------------------------------------->
+
 	<div class="container d-flex">
-		<div class="container">
-		<div class="flex-shrink-0 p-3 bg-secondary" style="width: 280px; height:100%;">
-			<a href="/"
-				class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom text-white">
-				<svg class="bi pe-none me-2" width="30" height="24">
-					<use xlink:href="#bootstrap"></use></svg> 
-					<span class="fs-5 fw-semibold">UNLa</span>
-			</a>
-			<ul class="list-unstyled ps-0">
-				<li class="mb-1">
-					<button
-						class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed text-white dropdown-btn"
-						data-bs-toggle="collapse" data-bs-target="#home-collapse"
-						aria-expanded="true">Home</button>
-						
-					<div class="collapse ml-4" id="home-collapse">
-						<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-							<li><a href="/"
-								class="link-body-emphasis d-inline-flex text-decoration-none rounded text-white-50">Mapa
-									UNLa </a></li>
-							<li><a href="#"
-								class="link-body-emphasis d-inline-flex text-decoration-none rounded text-white-50">Monitoreo</a></li>
-							<li><a href="#"
-								class="link-body-emphasis d-inline-flex text-decoration-none rounded text-white-50">Reportes</a></li>
-						</ul>
-					</div>
-				</li>
-				<li class="mb-1">
-					<button
-						class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed text-white dropdown-btn"
-						data-bs-toggle="collapse" data-bs-target="#dashboard-collapse"
-						aria-expanded="false">Dispositivos</button>
-					<div sec:authorize="hasRole('ROLE_ADMIN')" class="collapse ml-4" id="dashboard-collapse">
-						<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-
-							<li><a href="/dispositivos" class="link-body-emphasis d-inline-flex text-decoration-none rounded text-white-50">Listado de tipos</a></li>
-						</ul>
-					</div>
-				</li>
-<!-- 				<li class="mb-1"> -->
-<!-- 					<button -->
-<!-- 						class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed text-white dropdown-btn" -->
-<!-- 						data-bs-toggle="collapse" data-bs-target="#orders-collapse" -->
-<!-- 						aria-expanded="false">Sensores</button> -->
-						
-<!-- 					<div class="collapse ml-4" id="orders-collapse">					 -->
-<!-- 						<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small" > -->
-<!-- 							<li th:each = "device: ${devices}" th:object-id="${device.id}"> -->
-<!-- 								<a th:href="@{/sensors/{name}(name=${device.name})|" -->
-<!-- 									class="link-body-emphasis d-inline-flex text-decoration-none rounded text-white-50" > -->
-<!-- 									<text th:text="device:${device.name}"/> -->
-<!-- 								</a> -->
-<!-- 							</li> -->
-<!-- 						</ul> -->
-<!-- 					</div> -->
-<!-- 				</li> -->
-
-				<li class="mb-1">
-					<button
-						class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed text-white dropdown-btn"
-						data-bs-toggle="collapse" data-bs-target="#orders-collapse"
-						aria-expanded="false">Estacionamiento</button>
-						
-					<div class="collapse ml-4" id="orders-collapse">
-						<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-							<li><a href="#"
-								class="link-body-emphasis d-inline-flex text-decoration-none rounded text-white-50">Alta</a></li>
-							<li><a href="#"
-								class="link-body-emphasis d-inline-flex text-decoration-none rounded text-white-50">Baja</a></li>
-							<li><a href="#"
-								class="link-body-emphasis d-inline-flex text-decoration-none rounded text-white-50">Modificacion</a></li>
-							<li><a href="#"
-								class="link-body-emphasis d-inline-flex text-decoration-none rounded text-white-50">Listado</a></li>
-							<li><a href="#"
-								class="link-body-emphasis d-inline-flex text-decoration-none rounded text-white-50S">Disponibilidad</a></li>
-						</ul>
-					</div>
-				</li>
-				<li class="border-top my-3"></li>
-			</ul>
-		</div>
+		<div th:replace="~{fragments :: sidebarFragment}"></div>
+		<img class="w-75" src="/Assets/UNLa.jpg">
 	</div>
-	
-		<img class="w-75" src="/assets/Plano-UNLa.jpg">	
-	</div>
-
-	<div th:replace="fragments :: footerFragment"></div>
-
-<script type="text/javascript">
-	var dropdown = document.getElementsByClassName("dropdown-btn");
-	var i;
-	for (i = 0; i < dropdown.length; i++) {
-	  dropdown[i].addEventListener("click", function() {
-	    this.classList.toggle("active");
-	    var dropdownContent = this.nextElementSibling;
-	    if (dropdownContent.style.display === "block") {
-	      dropdownContent.style.display = "none";
-	    } else {
-	      dropdownContent.style.display = "block";
-	    }
-	  });
-	}
-</script>
+<!------------------------------------------------------------------------------------------------------------------------------->
+	<div th:replace="~{fragments :: footerFragment}"></div>
+	<script src="/js/dropDown.js"></script>	
 </body>
 </html>

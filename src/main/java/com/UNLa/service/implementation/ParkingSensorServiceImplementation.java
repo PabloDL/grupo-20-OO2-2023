@@ -49,4 +49,11 @@ public class ParkingSensorServiceImplementation implements IParkingSensorService
 		dbParkingSensor.updateFields(parkingSensor);
 		return parkingSensorRepository.save(dbParkingSensor);
 	}
+
+	@Override
+	public ParkingSensor simulateParking(ParkingSensor parkingSensor) {
+			ParkingSensor dbParkingSensor = this.getParkingSensor((long) parkingSensor.getId());
+			dbParkingSensor.setAvailable(!parkingSensor.isAvailable());
+		return parkingSensorRepository.save(dbParkingSensor);
+	}
 }

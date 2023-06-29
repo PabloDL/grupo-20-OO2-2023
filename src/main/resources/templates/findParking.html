@@ -1,0 +1,95 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments :: headerFragment}"></head>
+<body>
+	<div th:replace="~{fragments :: navbarFragment}"></div>
+
+	<div class="container d-flex">
+		<div th:replace="~{fragments :: sidebarFragment2}"></div>
+		<div id="content" class="ml-5">
+			<div class="row">
+				<h1>Plazas Recomendadas</h1>
+			</div>
+			<div>
+				<table class="table">
+					<thead class="thead-dark">
+						<tr>
+							<th scope="col">Numero</th>
+							<th scope="col">Sector</th>
+						</tr>
+					</thead>
+					<tbody>
+<!-- 						<tr display="${reserved != null}?${'block'}:'none'"> -->
+<!-- 							<td th:text="${reserved.number}"></td> -->
+<!-- 							<td th:text="${reserved.sector}"></td> -->
+<!-- 							<td th:text="${reserved.parkingSensor.available}"></td> -->
+<!-- 							<td><a href="#" class="btn btn-warning save-btn">Simular Estacionar</a></td> -->
+<!-- 						</tr> -->
+						<tr th:each="recData: ${recommendedParkingSensorData}" th:spot-id="${recData.id}">
+							<td th:text="${recData.number}"></td>
+							<td th:text="${recData.sector}"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			
+			<div class="row">
+				<h1>Todas las Plazas Disponibles</h1>
+			</div>
+			<div>
+				<table class="table">
+					<thead class="thead-dark">
+						<tr>
+							<th scope="col">Numero</th>
+							<th scope="col">Sector</th>
+							<th scope="col">Disponible</th>
+							<th><th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="data: ${availableParkingSensorData}" th:spot-id="${data.id}">
+							<td th:text="${data.number}"></td>
+							<td th:text="${data.sector}"></td>
+							<td><input th:sensor-id="${data.parkingSensor.id}" class="checkbox-big" type="checkbox" disabled="disabled" name="available" th:checked="${data.parkingSensor.available}"/></td>
+							<td><a style="display:initial" href="#" class="btn btn-warning sim-btn">Simular Estacionar</a>
+								<a style="display:none" href="#" class="btn btn-danger sim-btn">Simular Abandonar</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="row">
+				<h1>Todas las Plazas</h1>
+			</div>
+			<div>
+				<table class="table">
+					<thead class="thead-dark">
+						<tr>
+							<th scope="col">Numero</th>
+							<th scope="col">Sector</th>
+							<th scope="col">Disponible</th>
+							<th><th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="allData: ${allParkingSensorData}" th:spot-id="${allData.id}">
+							<td th:text="${allData.number}"></td>
+							<td th:text="${allData.sector}"></td>
+							<td><input th:sensor-id="${allData.parkingSensor.id}" class="checkbox-big" type="checkbox" disabled="disabled" name="available" th:checked="${allData.parkingSensor.available}"/></td>
+							<td><a style="display:initial" href="#" class="btn btn-warning sim-btn">Simular Estacionar</a>
+								<a style="display:none" href="#" class="btn btn-danger sim-btn">Simular Abandonar</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<div th:replace="fragments :: footerFragment"></div>
+	<script src="/js/dropDown.js"></script>
+	<script src="/js/dataUpdater.js"></script>
+</body>
+</html>

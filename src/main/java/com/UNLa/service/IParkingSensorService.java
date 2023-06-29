@@ -13,4 +13,6 @@ public interface IParkingSensorService {
 	boolean assignSpot();
 	
 	ParkingSensor createUpdateParkingSensor(ParkingSensor parkingSensor);
+
+	ParkingSensor simulateParking(ParkingSensor sensorChanges);
 }

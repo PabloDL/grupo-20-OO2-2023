@@ -66,7 +66,7 @@ public class DeviceController {
 		model.addAttribute("parkingSpots", dbParkingSpotsSensors);
 		model.addAttribute("parkingNumbers", parkingNumbers);
 		model.addAttribute("parkingSectors", parkingSectors);
-		model.addAttribute("numberSectors", numberSectors );
+		model.addAttribute("numberSectors", numberSectors);
 		model.addAttribute("parkingSensors", dbParkingSensors);
 		model.addAttribute("unassignedParkingSensors", unassignedParkingSensors);
 		
@@ -75,12 +75,31 @@ public class DeviceController {
 	
 	@PostMapping("/devices/parkingSensor/crud")
 	public ResponseEntity<String> handleCrudRequest(@RequestBody Spot parkingSpot) {
+		
 		Device device = deviceService.getDevice((long) parkingSpot.getParkingSensor().getDevice().getId());
 		parkingSpot.getParkingSensor().setDevice(device);
 		ParkingSensor storedSensor = parkingSensorService.createUpdateParkingSensor(parkingSpot.getParkingSensor());
+
 		parkingSpotService.assignSpot(parkingSpot);
 				
 		return ResponseEntity.ok("" + storedSensor.getId() );
+	}
+	
+	
+	@GetMapping("/estacionamientos")
+	public String listParkingSpots(Model model) {
+		List<Spot> dbParkingSpots = parkingSpotService.getAllSpots();
+
+		model.addAttribute("parkingSpots", dbParkingSpots);
+		
+		return "parkingSpots";
+	}
+	
+	@PostMapping("/parkingSpots/crud")
+	public ResponseEntity<String>  parkingSpotsCrudHandler(@RequestBody Spot parkingSpot) {
+		Spot storedParkingSpot = parkingSpotService.createUpdateSpot(parkingSpot);
+
+		return ResponseEntity.ok("" + storedParkingSpot.getId());
 	}
 	
 }
