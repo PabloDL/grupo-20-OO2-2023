@@ -58,16 +58,6 @@ public class HomeController {
 		return "findParking";
 	}
 	
-//	@PostMapping("/simulateParking")
-//	public ResponseEntity<String>  simulateParking(@RequestBody Spot parkingSpot) {
-//		ParkingSensor changes = parkingSpot.getParkingSensor();
-//		Spot storedParkingSpot = parkingSpotService.getParkingSpot((long) parkingSpot.getId());
-//		ParkingSensor storedParkingSensor = storedParkingSpot.getParkingSensor().updateFields(changes);
-//		//parkingSensorService.(parkingSensor);
-//
-//		return ResponseEntity.ok("" + storedParkingSensor.isAvailable());
-//	}
-	
 	@PostMapping("/simulateParking")
 	public ResponseEntity<String>  simulateParking(@RequestBody ParkingSensor sensorChanges) {
 		ParkingSensor storedParkingSensor = parkingSensorService.simulateParking(sensorChanges);
