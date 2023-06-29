@@ -33,17 +33,6 @@ public class HomeController {
 		return "map";
 	}
 	
-	@GetMapping("/monitoreo")
-	public String monitorDevices() {
-		return "monitoring";
-	}
-	
-	@PostMapping("/monitoreo")
-	public String handleRequestMonitorDevices() {
-		return "monitoring";
-	}
-	
-	
 	@GetMapping("/buscarEstacionamiento")
 	public String findParkingSpots(Model model) {
 		List<Spot> recommendedParkingSpotAndSensors = parkingSpotService.getRecommendedParkingSpots();
